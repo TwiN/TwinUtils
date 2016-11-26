@@ -5,6 +5,7 @@ public class RandomUtils {
 	
 	private RandomUtils() {}
 	
+	
 	/**
 	 * Methode qui genere un char aleatoire minuscule
 	 * @return lettre minuscule
