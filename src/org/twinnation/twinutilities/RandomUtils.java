@@ -7,8 +7,8 @@ public class RandomUtils {
 	
 	
 	/**
-	 * Methode qui genere un char aleatoire minuscule
-	 * @return lettre minuscule
+	 * Generates a random lowercase character
+	 * @return Lowercase char
 	 */
 	public static char randomLowercaseLetter() {
 		return (char)((int)'a'+Math.random()*((int)'z'-(int)'a'+1));
@@ -16,8 +16,8 @@ public class RandomUtils {
 	
 	
 	/**
-	 * Methode qui genere un char aleatoire majuscule
-	 * @return lettre majuscule
+	 * Generates a random uppercase character
+	 * @return Uppercase char
 	 */
 	public static char randomUppercaseLetter() {
 		return (char)((int)'A'+Math.random()*((int)'Z'-(int)'A'+1));
@@ -25,8 +25,8 @@ public class RandomUtils {
 	
 	
 	/**
-	 * Methode qui genere un char aleatoire
-	 * @return lettre
+	 * Generates a random character
+	 * @return char
 	 */
 	public static char randomLetter() {
 		char[] c = {randomLowercaseLetter(), randomUppercaseLetter()};
@@ -35,10 +35,10 @@ public class RandomUtils {
 	
 	
 	/**
-	 * Methode qui genere un nombre entier entre min et max.
-	 * @param min Nombre entier minimal
-	 * @param max Nombre entier maximal
-	 * @return int
+	 * Generates a random integer between min and max
+	 * @param min Minimum value
+	 * @param max Maximum value
+	 * @return Integer
 	 */
 	public static int randomInteger(int min, int max) {
 		return (int)((Math.random()*(max-min+1)+min));
