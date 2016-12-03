@@ -13,10 +13,11 @@ public final class FileUtils {
 	
 	private FileUtils() {}
 	
+	
 	/**
-	 * Methode qui converti un fichier en chaine de caractere.
-	 * @param fullPath Chemin complet
-	 * @return donnees dans le fichier passe en parametre
+	 * Puts the content of a file in a String
+	 * @param fullPath Path to the file 
+	 * @return Content of the file
 	 */
 	public static String getFileContents(String fullPath) {
 		String contents = "";
@@ -31,11 +32,42 @@ public final class FileUtils {
 	
 	
 	/**
-	 * Methode qui ecrit dans un fichier
-	 * @param data Donnees a mettre dans le fichier
-	 * @param fName Nom du fichier
-	 * @param append true pour ajouter, false pour ecraser.
-	 * @return vrai si le fichier existe
+	 * Function that gets the size of a file in bytes
+	 * @param fullPath Path of the file
+	 * @return File size in bytes
+	 */
+	public static long getFileSizeInByte(String fullPath) {
+		File f = new File(fullPath);
+		return (f.length());
+	}
+	
+	
+	/**
+	 * Function that gets the size of a file in KB
+	 * @param fullPath Path of the file
+	 * @return File size in KB
+	 */
+	public static double getFileSizeInKb(String fullPath) {
+		return ConversionUtils.fixedDecimal(3, (double)getFileSizeInByte(fullPath)/1024d);
+	}
+	
+	
+	/**
+	 * Function that gets the size of a file in MB
+	 * @param fullPath Path of the file
+	 * @return File size in MB
+	 */
+	public static double getFileSizeInMb(String fullPath) {
+		return ConversionUtils.fixedDecimal(3, (double)getFileSizeInKb(fullPath)/1024d);
+	}
+	
+	
+	/**
+	 * Writes data a file
+	 * @param data Data to put in file
+	 * @param fName File name
+	 * @param append Appends to the end of the file or not
+	 * @return true if the file exists
 	 */
 	public static boolean writeInFile(String data, String fName, boolean append) {
 		try {
@@ -49,6 +81,5 @@ public final class FileUtils {
 		}
 		return (new File(fName).exists());
 	}
-	
 
 }
