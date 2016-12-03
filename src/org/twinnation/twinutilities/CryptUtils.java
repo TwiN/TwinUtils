@@ -12,9 +12,9 @@ public final class CryptUtils {
 	private CryptUtils() {}
 	
 	/**
-	 * Methode qui encode une une liste de byte
-	 * @param b Liste de byte
-	 * @return String encode en base 64
+	 * Encodes a byte array using base64
+	 * @param b Byte array
+	 * @return Base64 encoded string
 	 */
 	public static String base64encode(byte[] b) {
 		return Base64.getEncoder().encodeToString(b);
@@ -22,9 +22,9 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Encode une String en base64
-	 * @param s String
-	 * @return String encode en base 64
+	 * Encodes a String using base64
+	 * @param s String to encode
+	 * @return Base64 encoded string
 	 */
 	public static String base64encode(String s) {
 		return Base64.getEncoder().encodeToString(s.getBytes());
@@ -32,9 +32,9 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Methode qui decode une liste de byte encode en base 64
-	 * @param b Liste de byte
-	 * @return String decode
+	 * Decodes a base64 encoded byte array
+	 * @param b Byte array 
+	 * @return Decoded String
 	 */
 	public static String base64decode(byte[] b) {
 		String decodedString = "";
@@ -48,9 +48,9 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Methode qui decode une String encode en base 64
-	 * @param s String encode en base64
-	 * @return String decode
+	 * Decodes a base64 encoded String
+	 * @param s Base64 encoded String
+	 * @return Decoded String
 	 */
 	public static String base64decode(String s) {
 		String decodedString = "";
@@ -64,11 +64,10 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Methode qui retourne le hash d'un mot de passe claire en utilisant
-	 * l'algorythm SHA-512 ainsi qu'un salt.
-	 * @param password Mot de passe
+	 * Uses the SHA512 algorithm to create a salted hash for the given password 
+	 * @param password Password
 	 * @param salt Salt
-	 * @return hashSalt
+	 * @return PasswordHash:PasswordSalt
 	 */
 	public static String sha512Salted(String password, String salt) {
 		StringBuilder sb = new StringBuilder();
@@ -90,8 +89,8 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Methode qui genere un salt aleatoire
-	 * @return salt aleatoire
+	 * Generates a secure salt
+	 * @return Random salt
 	 */
 	public static String getSalt() {
 		byte[] salt = new byte[24];
@@ -102,10 +101,10 @@ public final class CryptUtils {
 	
 	
 	/**
-	 * Methode qui valide un mot de passe genere par sha512Salted
-	 * @param password Mot de passe
-	 * @param hashSalt hashSalt
-	 * @return vrai si le mot de passe concorde avec le hashSalt
+	 * Validates a password generated with CryptUtils.sha512Salted
+	 * @param password Password
+	 * @param hashSalt PasswordHash:PasswordSalt
+	 * @return True if the password matches
 	 */
 	public static boolean validateSha512Salted(String password, String hashSalt) {
 		String salt = hashSalt.split(":")[1];
