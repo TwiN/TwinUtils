@@ -2,6 +2,7 @@ package org.twinnation.twinutilities;
 
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -71,14 +72,17 @@ public final class CryptUtils {
 	 */
 	public static String sha512Salted(String password, String salt) {
 		StringBuilder sb = new StringBuilder();
+		MessageDigest md;
 		try {
-      MessageDigest md = MessageDigest.getInstance("SHA-512");
-      md.update(salt.getBytes("UTF-8"));
-      byte[] bytes = md.digest(password.getBytes("UTF-8"));
-      for (int i = 0; i<bytes.length; i++){
-         sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-      }
-		} catch (Exception e) {
+			md = MessageDigest.getInstance("SHA-512");
+			md.update(salt.getBytes("UTF-8"));
+			byte[] bytes = md.digest(password.getBytes("UTF-8"));
+			for (int i = 0; i<bytes.length; i++){
+				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+			}
+		} catch (NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}
 		return sb.toString()+":"+salt;
