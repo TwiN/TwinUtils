@@ -6,11 +6,11 @@ public class SearchUtils {
 	private SearchUtils() {}
 	
 	/**
-	 * Methode qui cherche un element dans une liste.
+	 * Checks if the object <i>needle</i> is in the array <i>haystack</i>
 	 * NOTE: 1.0 (double) != 1 (int)...
-	 * @param haystack Liste a chercher
-	 * @param needle Element a trouver
-	 * @return vrai si needle est dans haystack
+	 * @param haystack Array to search
+	 * @param needle Element to find
+	 * @return Whether the <i>needle</i> is in the <i>haystack</i> or not
 	 */
 	public static boolean isInList(Object[] haystack, Object needle) {
 		for(Object o: haystack) {
@@ -21,11 +21,10 @@ public class SearchUtils {
 	
 	
 	/**
-	 * Methode qui cherche une chaine de caractere dans une autre chaine de
-	 * caracteres.
-	 * @param haystack Mot a chercher
-	 * @param needle Chaine de caracteres a trouver
-	 * @return
+	 * Checks if the String <i>needle</i> is in the String <i>haystack</i>
+	 * @param haystack String to search
+	 * @param needle String to find
+	 * @return Whether the <i>needle</i> is in the <i>haystack</i> or not
 	 */
 	public static boolean isInString(String haystack, String needle) {
 		return (haystack.indexOf(needle) >= 0);
@@ -33,14 +32,31 @@ public class SearchUtils {
 	
 	
 	/**
-	 * Methode qui teste si un objet est null.
+	 * Checks if an object is null
 	 * @param o Object
-	 * @return vrai si o est null
+	 * @return Whether the Object <i>o</i> is null or not
 	 */
 	public static boolean isNull(Object o) {
 		if (o == null || (o+"").equalsIgnoreCase("null")) {
 			return true;
 		}
 		return false;
+	}
+	
+	
+	/**
+	 * Checks if the given String is a palindrome.
+	 * @param s String to check
+	 * @return Whether the String <i>s</i> is a palindrome or not
+	 */
+	public static boolean isPalindrome(String s) {
+		for (int i = 0; i < s.length()/2; i++) {
+			if (s.charAt(i) == s.charAt(s.length()-1-i)) {
+				continue;
+			} else {
+				return false;
+			}
+		}
+		return true;
 	}
 }

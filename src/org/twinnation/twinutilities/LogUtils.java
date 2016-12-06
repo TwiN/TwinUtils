@@ -111,6 +111,7 @@ public final class LogUtils {
 		}
 	}
 	
+	// TODO: move me to a different Util class
 	private static String getTimestamp() {
 		Calendar c = Calendar.getInstance();
 		int y = c.get(Calendar.YEAR);
