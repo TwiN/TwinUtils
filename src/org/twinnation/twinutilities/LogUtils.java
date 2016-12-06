@@ -111,10 +111,11 @@ public final class LogUtils {
 		}
 	}
 	
-	// TODO: move me to a different Util class
+	// TODO: move me to a different Util class (DateTimeUtils?)
 	private static String getTimestamp() {
 		Calendar c = Calendar.getInstance();
 		int y = c.get(Calendar.YEAR);
+		// TODO: split this method in two: getTime and getDate
 		String m = ConversionUtils.zeroPad(2, ""+(c.get(Calendar.MONTH)+1));
 		String d = ConversionUtils.zeroPad(2, ""+c.get(Calendar.DAY_OF_MONTH));
 		String h = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR_OF_DAY));

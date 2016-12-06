@@ -1,6 +1,5 @@
 package org.twinnation.twinutilities.exceptions;
 
-
 public class LogNotInitializedException extends RuntimeException {
 	
 	private static final long serialVersionUID = 733612939030343702L;

@@ -1,9 +1,12 @@
 package org.twinnation.twinutilities;
 
+import org.twinnation.twinutilities.exceptions.InvalidPrimePositionException;
+
 public final class MathUtils {
 	
 	private MathUtils() {}
 
+	
 	/**
 	 * Checks if the number passed as argument is prime
 	 * @param n Number to check
@@ -24,15 +27,19 @@ public final class MathUtils {
 		return true;
 	}
 	
+	
 	/**
 	 * Finds the value of the nth prime
-	 * NOTE: 1 is NOT a prime number!
 	 * @param nthPrime Position of the prime to find
 	 * @return value of the nth prime
+	 * @throws PrimeCannotBeNegativeException 
 	 */
-	public static int getPrimeAtPosition(int nthPrime) { 
+	public static int getPrimeAtPosition(int nthPrime) throws InvalidPrimePositionException { 
+		if (nthPrime < 1) {
+			throw new InvalidPrimePositionException();
+		}
 		// TODO: throw exception if pass invalid number
-		int primeCounter = 0, result = 0;
+		int primeCounter = 1, result = 0;
 		for (int i = 0; primeCounter <= nthPrime; i++) {
 			if (isPrime(i)) { 
 				if (primeCounter == nthPrime) {
@@ -43,9 +50,5 @@ public final class MathUtils {
 			}
 		}
 		return result;
-	}
-	
-	public static void main(String[] args) {
-		System.out.println(getPrimeAtPosition(-5));
 	}
 }
