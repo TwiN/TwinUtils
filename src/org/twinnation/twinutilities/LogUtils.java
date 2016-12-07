@@ -1,7 +1,5 @@
 package org.twinnation.twinutilities;
 
-import java.util.Calendar;
-
 import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
 public final class LogUtils {
