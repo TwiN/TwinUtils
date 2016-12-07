@@ -120,7 +120,7 @@ public final class LogUtils {
 		String d = ConversionUtils.zeroPad(2, ""+c.get(Calendar.DAY_OF_MONTH));
 		String h = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR_OF_DAY));
 		String min = ConversionUtils.zeroPad(2, ""+c.get(Calendar.MINUTE));
-		String s = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR));
+		String s = ConversionUtils.zeroPad(2, ""+c.get(Calendar.SECOND));
 		return y+"-"+m+"-"+d+" "+h+":"+min+":"+s;
 	}
 }
