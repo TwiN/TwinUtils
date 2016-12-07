@@ -1,5 +1,6 @@
 package org.twinnation.twinutilities;
 
+import java.util.Calendar;
 
 //
 // IN PROGRESS
@@ -17,6 +18,8 @@ public final class DateTimeUtils {
 	
 	
 	public static final double DAY_PER_YEAR = 365.2425;
+	public static final double CAL_DAY_PER_YEAR = 365;
+	public static final double CAL_LEAP_DAY_PER_YEAR = 366;
 	public static final double MONTH_PER_YEAR = 12;
 	
 	public static final int[] DAY_PER_MONTH = {0,
@@ -63,11 +66,6 @@ public final class DateTimeUtils {
 		return (getYearSinceUnix()*MONTH_PER_YEAR);
 	}
 	
-	
-	
-	
-	
-	
 	public static int getYear() {
 		return (int)getYearSinceUnix()+START_YEAR;
 	}
@@ -76,17 +74,27 @@ public final class DateTimeUtils {
 		return (int)Math.ceil(getMonthSinceUnix()%MONTH_PER_YEAR);
 	}
 	
+	public static int getDayOfYear() {
+		return (int)Math.ceil(getYearSinceUnix()%1*(isLeapYear(getYear()) ?
+				CAL_LEAP_DAY_PER_YEAR : CAL_DAY_PER_YEAR));
+	}
+	
 	public static int getDayOfWeek() {
 		return 0;
 	}
 	
 	public static int getDayOfMonth() {
-		return 0;
+		int currentMonth = JANUARY, currentDay = 0;
+		for (int i = 0; i < getDayOfYear(); i++) {
+			currentDay++;
+			if (currentDay == getDaysInMonthAtYear(getYear(), currentMonth)) {
+				currentDay = 0;
+				currentMonth++;
+			}
+		}
+		return currentDay;
 	}
 	
-	public static int getDayOfYear() {
-		return getDaySinceUnix();
-	}
 	
 	public static int getDaysInMonthAtYear(int year, int month) {
 		if (month == FEBRUARY) {
@@ -103,10 +111,36 @@ public final class DateTimeUtils {
 	}
 
 	
+	public static String getTimestamp() {
+		return getDate()+" "+getTime();
+	}
+	
+	public static String getDate() {
+		int y = getYear();
+		String m = ConversionUtils.zeroPad(2, ""+getMonth());
+		String d = ConversionUtils.zeroPad(2, ""+getDayOfMonth());
+		return y+"-"+m+"-"+d;
+	}
+	
+	public static String getTime() {
+		// TODO: make my own method for this
+		//String h = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR_OF_DAY));
+		//String m = ConversionUtils.zeroPad(2, ""+c.get(Calendar.MINUTE));
+		//String s = ConversionUtils.zeroPad(2,""+c.get(Calendar.SECOND));
+		//return h+"-"+m+"-"+s;
+		return "in progress";
+	}
+	
+	
+	
+	
+	
 	public static void main(String[] args) {
 		System.out.println(getYear());
 		System.out.println(getMonth());
-		
+		System.out.println("day of year "+getDayOfYear());
+		System.out.println("day of month "+getDayOfMonth());
+		System.out.println(getTimestamp());
 		
 	}
 }
