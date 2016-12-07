@@ -103,24 +103,11 @@ public final class LogUtils {
 		if (!isInitialized) {
 			throw new LogNotInitializedException();
 		} else {
-			message = getTimestamp()+" ["+level+"] -> "+message;
+			message = DateTimeUtils.getTimestamp()+" ["+level+"] -> "+message;
 			System.err.println(message);
 			if (isSavingToFile) {
 				FileUtils.writeInFile(message, currentLoggingFile, true);
 			}
 		}
-	}
-	
-	// TODO: move me to a different Util class (DateTimeUtils?)
-	private static String getTimestamp() {
-		Calendar c = Calendar.getInstance();
-		int y = c.get(Calendar.YEAR);
-		// TODO: split this method in two: getTime and getDate
-		String m = ConversionUtils.zeroPad(2, ""+(c.get(Calendar.MONTH)+1));
-		String d = ConversionUtils.zeroPad(2, ""+c.get(Calendar.DAY_OF_MONTH));
-		String h = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR_OF_DAY));
-		String min = ConversionUtils.zeroPad(2, ""+c.get(Calendar.MINUTE));
-		String s = ConversionUtils.zeroPad(2, ""+c.get(Calendar.SECOND));
-		return y+"-"+m+"-"+d+" "+h+":"+min+":"+s;
 	}
 }

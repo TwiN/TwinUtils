@@ -5,8 +5,6 @@ import java.util.Calendar;
 //
 // IN PROGRESS
 //
-//
-//
 
 public final class DateTimeUtils {
 	
@@ -18,16 +16,19 @@ public final class DateTimeUtils {
 	
 	
 	public static final double DAY_PER_YEAR = 365.2425;
-	public static final double CAL_DAY_PER_YEAR = 365;
-	public static final double CAL_LEAP_DAY_PER_YEAR = 366;
+	public static final int CAL_DAY_PER_YEAR = 365;
+	public static final int CAL_LEAP_DAY_PER_YEAR = 366;
 	public static final double MONTH_PER_YEAR = 12;
 	
-	public static final int[] DAY_PER_MONTH = {0,
+	public static final int[] DAY_PER_MONTH = {0, 
 			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	
-	public static final String[] MONTH_NAMES = {"NOT_A_MONTH", 
+	public static final String[] MONTH_NAMES = {"",
 			"January", "February", "March", "April", "May", "June", "July",
 			"August", "September", "October", "November", "December"};
+	
+	public static final String[] DAY_NAMES = {"",
+			"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	
 	public static final int JANUARY   = 1;
 	public static final int FEBRUARY  = 2;
@@ -43,9 +44,7 @@ public final class DateTimeUtils {
 	public static final int DECEMBER  = 12;
 	
 	public static final int START_YEAR = 1970;
-	
-	
-	
+
 	
 	private DateTimeUtils() {}
 	
@@ -66,21 +65,29 @@ public final class DateTimeUtils {
 		return (getYearSinceUnix()*MONTH_PER_YEAR);
 	}
 	
+
 	public static int getYear() {
 		return (int)getYearSinceUnix()+START_YEAR;
+		//return Calendar.getInstance().get(Calendar.YEAR);
 	}
 	
 	public static int getMonth() {
 		return (int)Math.ceil(getMonthSinceUnix()%MONTH_PER_YEAR);
+		//return Calendar.getInstance().get(Calendar.MONTH)+1;
 	}
 	
 	public static int getDayOfYear() {
 		return (int)Math.ceil(getYearSinceUnix()%1*(isLeapYear(getYear()) ?
 				CAL_LEAP_DAY_PER_YEAR : CAL_DAY_PER_YEAR));
+		//return Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
 	}
 	
 	public static int getDayOfWeek() {
-		return 0;
+		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK); // TODO: dayofweek
+	}
+	
+	public static String getDayName(int day) {
+		return DAY_NAMES[day]; // TODO: prevent invalid number
 	}
 	
 	public static int getDayOfMonth() {
@@ -103,11 +110,39 @@ public final class DateTimeUtils {
 		return DAY_PER_MONTH[month]; // TODO: custom error for invalid month number
 	}
 	
+	
+	/**
+	 * Checks if the year passed as parameter is a leap year
+	 * @param year Year to check
+	 * @return Whether the year is a leap year or not
+	 */
 	public static boolean isLeapYear(int year) {
-		if (year%4==0 || (year%100==0 && year%400==0)) {
-			return true;
-		}
-		return false;
+		return (year%4==0 || (year%100==0 && year%400==0));
+	}
+	
+	
+	/**
+	 * Gets the number of hours on the clock of the current time 
+	 * @return Number of hours
+	 */
+	public static long getHours() {
+		return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+	}
+	
+	/**
+	 * Gets the number of minutes on the clock of the current time 
+	 * @return Number of minutes
+	 */
+	public static int getMinutes() {
+		return Calendar.getInstance().get(Calendar.MINUTE);
+	}
+	
+	/**
+	 * Gets the number of seconds on the clock of the current time 
+	 * @return Number of seconds
+	 */
+	public static int getSeconds() {
+		return Calendar.getInstance().get(Calendar.SECOND);
 	}
 
 	
@@ -123,24 +158,15 @@ public final class DateTimeUtils {
 	}
 	
 	public static String getTime() {
-		// TODO: make my own method for this
-		//String h = ConversionUtils.zeroPad(2, ""+c.get(Calendar.HOUR_OF_DAY));
-		//String m = ConversionUtils.zeroPad(2, ""+c.get(Calendar.MINUTE));
-		//String s = ConversionUtils.zeroPad(2,""+c.get(Calendar.SECOND));
-		//return h+"-"+m+"-"+s;
-		return "in progress";
+		String h = ConversionUtils.zeroPad(2, ""+getHours());
+		String m = ConversionUtils.zeroPad(2, ""+getMinutes());
+		String s = ConversionUtils.zeroPad(2,""+getSeconds());
+		return h+":"+m+":"+s;
 	}
 	
-	
-	
-	
-	
+	/*
 	public static void main(String[] args) {
-		System.out.println(getYear());
-		System.out.println(getMonth());
-		System.out.println("day of year "+getDayOfYear());
-		System.out.println("day of month "+getDayOfMonth());
 		System.out.println(getTimestamp());
-		
-	}
+		System.out.println(getDayName(getDayOfWeek()));
+	}*/
 }
