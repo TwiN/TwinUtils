@@ -53,13 +53,16 @@ public final class DateTimeUtils {
 		return System.currentTimeMillis();
 	}
 	
+	
 	private static double getDaySinceUnix() {
 		return (getUnixTime()/MS_PER_DAY);
 	}
 	
+	
 	private static double getYearSinceUnix() {
 		return (getDaySinceUnix()/DAY_PER_YEAR);
 	}
+	
 	
 	private static double getMonthSinceUnix() {
 		return (getYearSinceUnix()*MONTH_PER_YEAR);
@@ -71,10 +74,12 @@ public final class DateTimeUtils {
 		//return Calendar.getInstance().get(Calendar.YEAR);
 	}
 	
+	
 	public static int getMonth() {
 		return (int)Math.ceil(getMonthSinceUnix()%MONTH_PER_YEAR);
 		//return Calendar.getInstance().get(Calendar.MONTH)+1;
 	}
+	
 	
 	public static int getDayOfYear() {
 		return (int)Math.ceil(getYearSinceUnix()%1*(isLeapYear(getYear()) ?
@@ -82,13 +87,16 @@ public final class DateTimeUtils {
 		//return Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
 	}
 	
+	
 	public static int getDayOfWeek() {
 		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK); // TODO: dayofweek
 	}
 	
+	
 	public static String getDayName(int day) {
 		return DAY_NAMES[day]; // TODO: prevent invalid number
 	}
+	
 	
 	public static int getDayOfMonth() {
 		int currentMonth = JANUARY, currentDay = 0;
@@ -129,6 +137,7 @@ public final class DateTimeUtils {
 		return Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
 	}
 	
+	
 	/**
 	 * Gets the number of minutes on the clock of the current time 
 	 * @return Number of minutes
@@ -136,6 +145,7 @@ public final class DateTimeUtils {
 	public static int getMinutes() {
 		return Calendar.getInstance().get(Calendar.MINUTE);
 	}
+	
 	
 	/**
 	 * Gets the number of seconds on the clock of the current time 
@@ -146,10 +156,19 @@ public final class DateTimeUtils {
 	}
 
 	
+	/**
+	 * Gets Timestamp in format YYYY-MM-DD HH:MM:SS
+	 * @return YYYY-MM-DD HH:MM:SS
+	 */
 	public static String getTimestamp() {
 		return getDate()+" "+getTime();
 	}
 	
+	
+	/**
+	 * Gets date in format YYYY-MM-DD
+	 * @return YYYY-MM-DD
+	 */
 	public static String getDate() {
 		int y = getYear();
 		String m = ConversionUtils.zeroPad(2, ""+getMonth());
@@ -157,6 +176,11 @@ public final class DateTimeUtils {
 		return y+"-"+m+"-"+d;
 	}
 	
+	
+	/**
+	 * Gets the local time in format HH:MM:SS
+	 * @return HH:MM:SS
+	 */
 	public static String getTime() {
 		String h = ConversionUtils.zeroPad(2, ""+getHours());
 		String m = ConversionUtils.zeroPad(2, ""+getMinutes());
