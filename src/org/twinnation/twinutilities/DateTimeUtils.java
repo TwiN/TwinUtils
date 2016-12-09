@@ -48,39 +48,66 @@ public final class DateTimeUtils {
 	
 	private DateTimeUtils() {}
 	
-	
+	/**
+	 * Gets the amount of milliseconds since 1970-01-01 00:00:00 
+	 * @return Milliseconds since 1970-01-01 00:00:00 
+	 */
 	public static long getUnixTime() {
 		return System.currentTimeMillis();
 	}
 	
 	
+	/**
+	 * Gets the amount of days since 1970-01-01 00:00:00 
+	 * @return Days since 1970-01-01 00:00:00 
+	 */
 	private static double getDaySinceUnix() {
 		return (getUnixTime()/MS_PER_DAY);
 	}
 	
 	
+	/**
+	 * Gets the amount of years since 1970-01-01 00:00:00 
+	 * @return Years since 1970-01-01 00:00:00 
+	 */
 	private static double getYearSinceUnix() {
 		return (getDaySinceUnix()/DAY_PER_YEAR);
 	}
 	
 	
+	/**
+	 * Gets the amount of months since 1970-01-01 00:00:00 
+	 * @return Months since 1970-01-01 00:00:00
+	 */
 	private static double getMonthSinceUnix() {
 		return (getYearSinceUnix()*MONTH_PER_YEAR);
 	}
 	
-
+	
+	/**
+	 * Gets the current year
+	 * @return Current year
+	 */
 	public static int getYear() {
 		return (int)getYearSinceUnix()+START_YEAR;
 		//return Calendar.getInstance().get(Calendar.YEAR);
 	}
 	
 	
+	/**
+	 * Gets the current month
+	 * @return current Month
+	 */
 	public static int getMonth() {
 		return (int)Math.ceil(getMonthSinceUnix()%MONTH_PER_YEAR);
 		//return Calendar.getInstance().get(Calendar.MONTH)+1;
 	}
 	
 	
+	/**
+	 * Gets the current day of the year
+	 * @return Current day of the year
+	 */
 	public static int getDayOfYear() {
 		return (int)Math.ceil(getYearSinceUnix()%1*(isLeapYear(getYear()) ?
 				CAL_LEAP_DAY_PER_YEAR : CAL_DAY_PER_YEAR));
