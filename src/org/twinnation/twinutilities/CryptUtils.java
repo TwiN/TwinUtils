@@ -104,11 +104,30 @@ public final class CryptUtils {
 	 * Validates a password generated with CryptUtils.sha512Salted
 	 * @param password Password
 	 * @param hashSalt PasswordHash:PasswordSalt
-	 * @return True if the password matches
+	 * @return Whether the password matches or not
 	 */
 	public static boolean validateSha512Salted(String password, String hashSalt) {
 		String salt = hashSalt.split(":")[1];
 		return sha512Salted(password, salt).equalsIgnoreCase(hashSalt);
 	}
-
+	
+	
+	/**
+	 * Rotates the alphabetic characters in a string by 13 positions
+	 * @param s String to encrypt with rot13
+	 * @return Encrypted String
+	 */
+	public static String rot13(String s) {
+		String result = "";
+		for(int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M')) {
+				c+=13;
+			} else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z')) {
+				c -= 13;
+			}
+			result += c;
+		}
+		return result;
+	}
 }
