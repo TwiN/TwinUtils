@@ -11,7 +11,9 @@ import org.xml.sax.InputSource;
 
 public final class ConversionUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private ConversionUtils() {}
+	
 	
 	/**
 	 * Converts a char array to a String

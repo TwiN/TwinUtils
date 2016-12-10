@@ -3,6 +3,7 @@ package org.twinnation.twinutilities;
 
 public class RandomUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private RandomUtils() {}
 	
 	

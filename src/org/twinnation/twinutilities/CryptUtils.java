@@ -9,6 +9,7 @@ import java.util.Base64;
 
 public final class CryptUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private CryptUtils() {}
 	
 	/**

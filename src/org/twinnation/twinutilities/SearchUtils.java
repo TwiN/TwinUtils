@@ -3,7 +3,9 @@ package org.twinnation.twinutilities;
 
 public class SearchUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private SearchUtils() {}
+	
 	
 	/**
 	 * Checks if the object <i>needle</i> is in the array <i>haystack</i>

@@ -4,6 +4,7 @@ import org.twinnation.twinutilities.exceptions.InvalidPrimePositionException;
 
 public final class MathUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private MathUtils() {}
 
 	

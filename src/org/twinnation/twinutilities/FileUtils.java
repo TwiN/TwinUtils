@@ -11,6 +11,7 @@ import java.nio.file.Paths;
 
 public final class FileUtils {
 	
+	/** Prevents instantiation of this utility class */
 	private FileUtils() {}
 	
 	
@@ -81,5 +82,5 @@ public final class FileUtils {
 		}
 		return (new File(fName).exists());
 	}
-
+	
 }

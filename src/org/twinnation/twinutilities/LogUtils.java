@@ -4,9 +4,9 @@ import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
 public final class LogUtils {
 	
-	private static final String LEVEL_LOG = "LOGGING";
-	private static final String LEVEL_INFO = "INFORMA";
-	private static final String LEVEL_WARN = "WARNING";
+	private static final String LEVEL_LOG   = "LOGGING";
+	private static final String LEVEL_INFO  = "INFORMA";
+	private static final String LEVEL_WARN  = "WARNING";
 	private static final String LEVEL_ERROR = " ERROR ";
 	
 	private static final int MAX_LOG_FILE_SIZE_IN_KB = 1000;
@@ -18,6 +18,7 @@ public final class LogUtils {
 	private static boolean isSavingToFile = false;
 	
 	
+	/** Prevents instantiation of this utility class */
 	private LogUtils() {}
 	
 	
@@ -108,4 +109,5 @@ public final class LogUtils {
 			}
 		}
 	}
+	
 }

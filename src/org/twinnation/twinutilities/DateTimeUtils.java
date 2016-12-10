@@ -46,7 +46,9 @@ public final class DateTimeUtils {
 	public static final int START_YEAR = 1970;
 
 	
+	/** Prevents instantiation of this utility class */
 	private DateTimeUtils() {}
+	
 	
 	/**
 	 * Gets the amount of milliseconds since 1970-01-01 00:00:00 
