@@ -114,4 +114,67 @@ public final class ConversionUtils {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * Converts a length unit into another unit
+	 * FIXME: Please fix this javadoc, it's pathetic
+	 * @param num Amount of unit passed as parameter
+	 * @param unit Name of the unit
+	 * @param toUnit Name of the unit to convert to
+	 * @return Value of <i>num</i> <i>unit</i>s in <i>toUnit</i>s
+	 */
+	public static double unit2unit(double num, String unit, String toUnit) {
+		// FIXME: this is currently only for lenght units!
+		return num*(getUnitValueInCm(toUnit)/getUnitValueInCm(unit));
+	}
+	
+	
+	/**
+	 * Gets the value of a unit in cm
+	 * @param unit Name of the unit 
+	 * @return Value of 1 cm worth of the unit
+	 */
+	private static double getUnitValueInCm(String unit) {
+		double value = 0;
+		switch (unit.toLowerCase()) {
+			case "nm": case "nanometer": case "nanometre": // FIXME: should avoid this unit
+				value = 10000000;
+				break;
+			case "micrometer": case "micrometre":
+				value = 10000;
+				break;
+			case "mm": case "millimeter": case "millimetre":
+				value = 10;
+				break;
+			case "cm": case "centimeter": case "centimetre":
+				value = 1;
+				break;
+			case "dm": case "decimeter": case "decimetre":
+				value = 0.1;
+				break;
+			case "m": case "meter": case "metre":
+				value = 0.01;
+				break;
+			case "km": case "kilometer": case "kilometre":
+				value = 0.00001;
+				break;
+			case "mile": case "miles":
+				value = 0.00000621371;
+				break;
+			case "in": case "inch":
+				value = 0.393700787402;
+				break;
+			case "ft": case "feet": case "foot":
+				value = 0.0328084;
+				break;
+			case "yard": case "yd":
+				value = 0.0109361;
+				break;
+			default:
+				throw new IllegalArgumentException("'"+unit+"' is not a valid unit");
+		}
+		return value;
+	}
+	
 }
