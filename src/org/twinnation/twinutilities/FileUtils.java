@@ -93,4 +93,20 @@ public final class FileUtils {
 		return fileNameOrPath.substring(fileNameOrPath.lastIndexOf('.')+1);
 	}
 	
+	/**
+	 * Gets the base name of a file or a path
+	 * @param fileNameOrPath Name of the file or path toward the file
+	 * @return The base name of the file (file name without extension)
+	 */
+	public static String getBaseName(String fileNameOrPath) {
+		if (SearchUtils.isInString(fileNameOrPath, "/") || 
+				SearchUtils.isInString(fileNameOrPath, "\\")) {
+			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
+					'/' : (fileNameOrPath.lastIndexOf('\\')>=0) ? '\\' : null;
+			return fileNameOrPath.substring(fileNameOrPath.lastIndexOf(separator)+1,
+					fileNameOrPath.lastIndexOf('.'));
+		}
+		return fileNameOrPath.substring(0, fileNameOrPath.lastIndexOf('.'));
+	}
+	
 }
