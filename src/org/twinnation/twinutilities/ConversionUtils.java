@@ -171,7 +171,8 @@ public final class ConversionUtils {
 				value = 0.0109361;
 				break;
 			default:
-				throw new IllegalArgumentException("'"+unit+"' is not a valid unit");
+				throw new IllegalArgumentException("'"+unit+"' is not a "
+						+ "valid unit");
 		}
 		return value;
 	}
