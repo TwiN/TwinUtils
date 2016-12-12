@@ -118,14 +118,13 @@ public final class ConversionUtils {
 	
 	/**
 	 * Converts a length unit into another unit
-	 * FIXME: Please fix this javadoc, it's pathetic
 	 * @param num Amount of unit passed as parameter
 	 * @param unit Name of the unit
 	 * @param toUnit Name of the unit to convert to
 	 * @return Value of <i>num</i> <i>unit</i>s in <i>toUnit</i>s
 	 */
 	public static double unit2unit(double num, String unit, String toUnit) {
-		// FIXME: this is currently only for lenght units!
+		// FIXME: this is currently only for length units!
 		return num*(getUnitValueInCm(toUnit)/getUnitValueInCm(unit));
 	}
 	
@@ -138,7 +137,7 @@ public final class ConversionUtils {
 	private static double getUnitValueInCm(String unit) {
 		double value = 0;
 		switch (unit.toLowerCase()) {
-			case "nm": case "nanometer": case "nanometre": // FIXME: should avoid this unit
+			case "nm": case "nanometer": case "nanometre":
 				value = 10000000;
 				break;
 			case "micrometer": case "micrometre":
