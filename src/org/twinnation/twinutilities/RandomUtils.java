@@ -1,5 +1,6 @@
 package org.twinnation.twinutilities;
 
+import java.security.SecureRandom;
 
 public class RandomUtils {
 	
@@ -12,7 +13,8 @@ public class RandomUtils {
 	 * @return Lowercase char
 	 */
 	public static char randomLowercaseLetter() {
-		return (char)((int)'a'+Math.random()*((int)'z'-(int)'a'+1));
+		SecureRandom random = new SecureRandom();
+		return (char)((int)'a'+random.nextInt(('z'-'a')+1));
 	}
 	
 	
@@ -21,7 +23,8 @@ public class RandomUtils {
 	 * @return Uppercase char
 	 */
 	public static char randomUppercaseLetter() {
-		return (char)((int)'A'+Math.random()*((int)'Z'-(int)'A'+1));
+		SecureRandom random = new SecureRandom();
+		return (char)((int)'A'+random.nextInt(('Z'-'A')+1));
 	}
 	
 	
@@ -42,7 +45,7 @@ public class RandomUtils {
 	 * @return Integer
 	 */
 	public static int randomInteger(int min, int max) {
-		return (int)((Math.random()*(max-min+1)+min));
+		SecureRandom random = new SecureRandom();
+		return (min+random.nextInt(max-min+1));
 	}
-	
 }
