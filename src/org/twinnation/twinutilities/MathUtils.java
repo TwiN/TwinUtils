@@ -52,4 +52,24 @@ public final class MathUtils {
 		}
 		return result;
 	}
+	
+	
+	/**
+	 * Checks if the number n is odd
+	 * @param n Number to check
+	 * @return Whether the number is odd
+	 */
+	public static boolean isOdd(int n) {
+		return ((n & 1) == 1);
+	}
+	
+	
+	/**
+	 * Checks if the number n is even
+	 * @param n Number to check
+	 * @return Whether the number is even
+	 */
+	public static boolean isEven(int n) {
+		return !isOdd(n);
+	}
 }

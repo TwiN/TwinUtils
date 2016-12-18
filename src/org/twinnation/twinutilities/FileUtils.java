@@ -68,7 +68,7 @@ public final class FileUtils {
 	 * @param data Data to put in file
 	 * @param fName File name
 	 * @param append Appends to the end of the file or not
-	 * @return true if the file exists
+	 * @return Whether the file exists or not
 	 */
 	public static boolean writeInFile(String data, String fName, boolean append) {
 		try {
@@ -90,25 +90,43 @@ public final class FileUtils {
 	 * @return The extension of the file
 	 */
 	public static String getExtension(String fileNameOrPath) {
-		return fileNameOrPath.substring(fileNameOrPath.lastIndexOf('.')+1);
+		return fileNameOrPath.indexOf(".") > -1 ?
+				fileNameOrPath.substring(fileNameOrPath.indexOf(".")+1) : "";
 	}
 	
 	
 	/**
 	 * Gets the base name of a file or a path
 	 * @param fileNameOrPath Name of the file or path toward the file
-	 * @return The base name of the file (file name without extension)
+	 * @return A file name without any extension
 	 */
 	public static String getBaseName(String fileNameOrPath) {
-		if (SearchUtils.isInString(fileNameOrPath, "/") || 
-				SearchUtils.isInString(fileNameOrPath, "\\")) {
+		if (SearchUtils.isInString(fileNameOrPath, "/") 
+				|| SearchUtils.isInString(fileNameOrPath, "\\")) {
 			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
 					'/' : (fileNameOrPath.lastIndexOf('\\')>=0) ? '\\' : null;
 			return fileNameOrPath.substring(fileNameOrPath.lastIndexOf(separator)+1,
 					fileNameOrPath.lastIndexOf('.'));
 		}
-		return fileNameOrPath.substring(0, fileNameOrPath.lastIndexOf('.'));
+		return stripExtension(fileNameOrPath);
 	}
+	
+	
+	/**
+	 * Removes everything after the first "." in a String
+	 * @param s String to remove the extension from
+	 * @return String without any extension
+	 */
+	public static String stripExtension(String s) {
+		return s.indexOf('.') > -1 ? s.substring(0, s.indexOf('.')) : s;
+	}
+	
+	/*
+	public static void main(String[] args) {
+		String t = "C:/user/sometest/test.txt";
+		System.out.println(getBaseName(t));
+		System.out.println(stripExtension(t));
+	}*/
 	
 	
 	/**
