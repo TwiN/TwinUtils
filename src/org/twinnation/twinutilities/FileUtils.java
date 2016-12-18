@@ -96,38 +96,44 @@ public final class FileUtils {
 	
 	
 	/**
-	 * Gets the base name of a file or a path
+	 * Gets the name of a file without its path
+	 * <pre>
+	 * {@code
+	 * String path = "C:/some/path/example.txt";
+	 * System.out.println(getBaseName(path)); 
+	 * > example.txt
+	 * }
+	 * </pre>
 	 * @param fileNameOrPath Name of the file or path toward the file
 	 * @return A file name without any extension
 	 */
-	public static String getBaseName(String fileNameOrPath) {
-		if (SearchUtils.isInString(fileNameOrPath, "/") 
-				|| SearchUtils.isInString(fileNameOrPath, "\\")) {
-			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
-					'/' : (fileNameOrPath.lastIndexOf('\\')>=0) ? '\\' : null;
-			return fileNameOrPath.substring(fileNameOrPath.lastIndexOf(separator)+1,
-					fileNameOrPath.lastIndexOf('.'));
+	public static String getBaseName(String fullPath) {
+		if (SearchUtils.isInString(fullPath, "/") 
+				|| SearchUtils.isInString(fullPath, "\\")) {
+			Character separator = (fullPath.lastIndexOf('/')>=0) ?
+					'/' : (fullPath.lastIndexOf('\\')>=0) ? '\\' : null;
+			return fullPath.substring(fullPath.lastIndexOf(separator)+1);
 		}
-		return stripExtension(fileNameOrPath);
+		return fullPath;
 	}
 	
 	
 	/**
 	 * Removes everything after the first "." in a String
+	 * <pre>
+	 * {@code
+	 * String path = "C:/some/path/example.txt";
+	 * System.out.println(stripExtension(path)); 
+	 * > C:/some/path/example
+	 * }
+	 * </pre>
 	 * @param s String to remove the extension from
 	 * @return String without any extension
 	 */
 	public static String stripExtension(String s) {
 		return s.indexOf('.') > -1 ? s.substring(0, s.indexOf('.')) : s;
 	}
-	
-	/*
-	public static void main(String[] args) {
-		String t = "C:/user/sometest/test.txt";
-		System.out.println(getBaseName(t));
-		System.out.println(stripExtension(t));
-	}*/
-	
+
 	
 	/**
 	 * Creates a directory at the given path if it doesn't already exist
