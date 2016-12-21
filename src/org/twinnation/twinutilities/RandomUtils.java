@@ -2,6 +2,10 @@ package org.twinnation.twinutilities;
 
 import java.security.SecureRandom;
 
+/**
+ * Utility class with multiple methods related to the generation of 
+ * random elements
+ */
 public class RandomUtils {
 	
 	/** Prevents instantiation of this utility class */
