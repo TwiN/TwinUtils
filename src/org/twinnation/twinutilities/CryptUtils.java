@@ -6,7 +6,9 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Base64;
 
-
+/**
+ * Cryptography-related utility class
+ */
 public final class CryptUtils {
 	
 	/** Prevents instantiation of this utility class */

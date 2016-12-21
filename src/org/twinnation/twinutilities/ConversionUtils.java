@@ -8,7 +8,9 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
-
+/**
+ * Conversion-related utility class
+ */
 public final class ConversionUtils {
 	
 	/** Prevents instantiation of this utility class */

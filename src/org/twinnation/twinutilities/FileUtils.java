@@ -8,7 +8,9 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-
+/**
+ * File-related utility class
+ */
 public final class FileUtils {
 	
 	/** Prevents instantiation of this utility class */
