@@ -4,8 +4,6 @@ import org.twinnation.twinutilities.exceptions.InvalidPrimePositionException;
 
 /**
  * Math-related utility class
- * @author chris
- *
  */
 public final class MathUtils {
 	

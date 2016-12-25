@@ -2,8 +2,6 @@ package org.twinnation.twinutilities;
 
 /**
  * Search-related utility class
- * @author chris
- *
  */
 public class SearchUtils {
 	

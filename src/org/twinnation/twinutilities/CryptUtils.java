@@ -14,6 +14,7 @@ public final class CryptUtils {
 	/** Prevents instantiation of this utility class */
 	private CryptUtils() {}
 	
+	
 	/**
 	 * Encodes a byte array using base64
 	 * @param b Byte array
