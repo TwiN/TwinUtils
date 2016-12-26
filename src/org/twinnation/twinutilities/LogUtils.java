@@ -2,6 +2,11 @@ package org.twinnation.twinutilities;
 
 import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
+/**
+ * Utility class used to easily log events
+ * TODO: Find a better name for this class. This class isn't actually
+ * a "utility class", but rather, a normal class.
+ */
 public final class LogUtils {
 	
 	private static final String LEVEL_LOG   = "LOGGING";
