@@ -15,7 +15,7 @@ public final class LogUtils {
 	private static final String LEVEL_ERROR = " ERROR ";
 	
 	/** Maximum file size per log file generated */
-	private static final int MAX_LOG_FILE_SIZE_IN_KB = 1000;
+	private static final int MAX_LOG_FILE_SIZE_IN_KB = 250;
 	
 	private static int logFileCounter = 1;
 	/** The name of the logging file */
@@ -23,6 +23,7 @@ public final class LogUtils {
 	private static String currentLoggingFile;
 	private static boolean isInitialized = false;
 	private static boolean isSavingToFile = false;
+	private static boolean isPrintingToConsole = true;
 	
 	
 	/** Prevents instantiation of this utility class */
@@ -57,6 +58,20 @@ public final class LogUtils {
 		loggingFile = fName;
 		isSavingToFile = saveLogToFile;
 		init();
+	}
+	
+	
+	/**
+	 * Initializes the logging utility
+	 * @param fName
+	 * @param saveLogToFile Whether to save logs to file or not
+	 * @param printLogToConsole Whether to print logs to console or not
+	 */
+	public static void init(String fName, boolean saveLogToFile,
+			boolean printLogToConsole) {
+		// TODO: Throw exception if !printLogToConsole && !saveLogToFile
+		isPrintingToConsole = printLogToConsole;
+		init(fName, saveLogToFile);
 	}
 	
 	
@@ -103,20 +118,36 @@ public final class LogUtils {
 	 * @throws LogNotInitializedException If LogUtils.init hasn't been called
 	 */
 	private static void doLog(String level, String message) throws LogNotInitializedException {
+		if (!isInitialized) {
+			throw new LogNotInitializedException();
+		}
 		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
 			currentLoggingFile = FileUtils.stripExtension(loggingFile)
 					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
-					+""+FileUtils.getExtension(loggingFile);
+					+"."+(FileUtils.getExtension(loggingFile).equals("") ?
+						"txt" : FileUtils.getExtension(loggingFile));
 		}
-		if (!isInitialized) {
-			throw new LogNotInitializedException();
-		} else {
-			message = DateTimeUtils.getTimestamp()+" ["+level+"] -> "+message;
+		message = DateTimeUtils.getTimestamp()+" ["+level+"] -> "+message;
+		if (isPrintingToConsole) {
 			System.err.println(message);
-			if (isSavingToFile) {
-				FileUtils.writeInFile(message, currentLoggingFile, true);
-			}
+		}
+		if (isSavingToFile) {
+			FileUtils.writeInFile(message, currentLoggingFile, true);
 		}
 	}
+	
+	/*
+	public static void main(String[] args) {
+		LogUtils.init("logs.txt", true, false);
+		int x = 1000;
+		while (x --> 0) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+			}
+			LogUtils.log("tesasdadasdaf sfdsdgad asdasd asd asdasdas gfg sdjfi sdjf sdjf sdjf sd fjsdf sdjf sd fjsdf sdjf sdnf sdf sf dnsdf sdj ffjasjfsdfsdjfjsd jfsdjfs djfjsdfsjwejnresf4wu54398589389sd ifjsdif dfg fd gdfg fd gdfgfgdf gdf gfd gdfg sdf sfsdf sd fsdf sdfsdfffsdfsd t");
+		}
+	}
+	*/
 	
 }
