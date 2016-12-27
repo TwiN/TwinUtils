@@ -14,10 +14,12 @@ public final class LogUtils {
 	private static final String LEVEL_WARN  = "WARNING";
 	private static final String LEVEL_ERROR = " ERROR ";
 	
+	/** Maximum file size per log file generated */
 	private static final int MAX_LOG_FILE_SIZE_IN_KB = 1000;
 	
 	private static int logFileCounter = 1;
-	private static String loggingFile = "logs";
+	/** The name of the logging file */
+	private static String loggingFile = "logs.txt";
 	private static String currentLoggingFile;
 	private static boolean isInitialized = false;
 	private static boolean isSavingToFile = false;
@@ -102,7 +104,9 @@ public final class LogUtils {
 	 */
 	private static void doLog(String level, String message) throws LogNotInitializedException {
 		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
-			currentLoggingFile = loggingFile+""+ConversionUtils.zeroPad(4, ""+logFileCounter++);
+			currentLoggingFile = FileUtils.stripExtension(loggingFile)
+					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
+					+""+FileUtils.getExtension(loggingFile);
 		}
 		if (!isInitialized) {
 			throw new LogNotInitializedException();
