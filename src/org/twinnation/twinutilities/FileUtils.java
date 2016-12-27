@@ -93,7 +93,7 @@ public final class FileUtils {
 	 */
 	public static String getExtension(String fileNameOrPath) {
 		return fileNameOrPath.indexOf(".") > -1 ?
-				fileNameOrPath.substring(fileNameOrPath.indexOf(".")+1) : "";
+				fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".")+1) : "";
 	}
 	
 	
