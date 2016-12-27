@@ -1,5 +1,7 @@
 package org.twinnation.twinutilities;
 
+import java.io.File;
+
 import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
 /**
@@ -19,7 +21,8 @@ public final class LogUtils {
 	
 	private static int logFileCounter = 1;
 	/** The name of the logging file */
-	private static String loggingFile = "logs.txt";
+	private static String loggingFile = "logs.txt"; 
+	// TODO: add loggingFolder option
 	private static String currentLoggingFile;
 	private static boolean isInitialized = false;
 	private static boolean isSavingToFile = false;
@@ -122,6 +125,7 @@ public final class LogUtils {
 			throw new LogNotInitializedException();
 		}
 		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
+			CompressionUtils.gzipAndDelete(currentLoggingFile);
 			currentLoggingFile = FileUtils.stripExtension(loggingFile)
 					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
 					+"."+(FileUtils.getExtension(loggingFile).equals("") ?
@@ -135,19 +139,4 @@ public final class LogUtils {
 			FileUtils.writeInFile(message, currentLoggingFile, true);
 		}
 	}
-	
-	/*
-	public static void main(String[] args) {
-		LogUtils.init("logs.txt", true, false);
-		int x = 1000;
-		while (x --> 0) {
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-			}
-			LogUtils.log("tesasdadasdaf sfdsdgad asdasd asd asdasdas gfg sdjfi sdjf sdjf sdjf sd fjsdf sdjf sd fjsdf sdjf sdnf sdf sf dnsdf sdj ffjasjfsdfsdjfjsd jfsdjfs djfjsdfsjwejnresf4wu54398589389sd ifjsdif dfg fd gdfg fd gdfgfgdf gdf gfd gdfg sdf sfsdf sd fsdf sdfsdfffsdfsd t");
-		}
-	}
-	*/
-	
 }
