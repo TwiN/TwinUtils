@@ -135,7 +135,7 @@ public final class FileUtils {
 	 * @return String without its previous
 	 */
 	public static String stripExtension(String s) {
-		return s.indexOf('.') > -1 ? s.substring(0, s.indexOf('.')) : s;
+		return s.indexOf('.') > -1 ? s.substring(0, s.lastIndexOf('.')) : s;
 	}
 
 	
