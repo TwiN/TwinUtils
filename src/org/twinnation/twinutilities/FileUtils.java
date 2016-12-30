@@ -9,7 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 
 /**
- * File-related utility class
+ * Utility class related to files
  */
 public final class FileUtils {
 	
@@ -153,6 +153,4 @@ public final class FileUtils {
 		}
 		return false; // directory already exists
 	}
-	
-	
 }
