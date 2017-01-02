@@ -53,7 +53,7 @@ public final class NetUtils {
 	 */
 	public static boolean isPortBusy(String host, int port) {
 		try {
-			(new Socket(host, port)).close(); 
+			(new Socket(host, port)).close();
 		} catch(IOException e) {
 			return false; // Couldn't connect to host:port (port not in use)
 		}
