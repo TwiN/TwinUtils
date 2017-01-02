@@ -2,7 +2,6 @@ package org.twinnation.twinutilities;
 
 import java.io.IOException;
 import java.net.Socket;
-import java.net.SocketException;
 
 /**
  * Network-related utility class

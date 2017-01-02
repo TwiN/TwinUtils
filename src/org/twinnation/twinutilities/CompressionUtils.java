@@ -35,17 +35,15 @@ public final class CompressionUtils {
 	 * Compresses a JPG image
 	 * @param imageFileName Name of the image to compress
 	 * @return Whether the file was successfully compressed
-	 * @throws Exception
+	 * @throws Exception FIXME: Throw a better exception than that
 	 */
 	public static boolean compressJPG(String imageFileName) throws Exception {
 		String extension = FileUtils.getExtension(imageFileName);
 		String baseName = FileUtils.stripExtension(imageFileName);
 		String outputImageFileName = baseName+ "_min." + extension;
-			
 		File inputImg = new File(imageFileName); // source
 		File outputImg = new File(outputImageFileName); // destination
-
-		// I/O streams & writer
+		// IO streams & writer
 		InputStream input = new FileInputStream(inputImg);
 		OutputStream output = new FileOutputStream(outputImg);
 		BufferedImage bufferedImage = ImageIO.read(input);
@@ -54,21 +52,17 @@ public final class CompressionUtils {
 		ImageOutputStream imageOutputStream = ImageIO.createImageOutputStream(output);
 		imageWriter.setOutput(imageOutputStream);
 		ImageWriteParam params = imageWriter.getDefaultWriteParam();
-
 		// Compress the image
 		params.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 		params.setCompressionQuality(LOW_COMPRESSION_FACTOR);
-
 		// Create new image file
 		imageWriter.write(null,(new IIOImage(bufferedImage, null, null)),params);
-
 		// Close streams
 		input.close();
 		output.close();
 		imageOutputStream.close();
 		imageWriter.dispose();
-
-		// calculate size difference between old file vs new file
+		// Calculate size difference between old file vs new file
 		return ((inputImg.length()-outputImg.length())<=0);
 	}
 	
@@ -118,5 +112,4 @@ public final class CompressionUtils {
         }
 		return (new File(fileName)).delete();
 	}
-	
 }

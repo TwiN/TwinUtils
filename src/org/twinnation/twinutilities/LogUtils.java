@@ -1,7 +1,5 @@
 package org.twinnation.twinutilities;
 
-import java.io.File;
-
 import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
 /**
