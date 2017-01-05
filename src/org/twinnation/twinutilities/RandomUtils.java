@@ -14,7 +14,7 @@ public class RandomUtils {
 	
 	/**
 	 * Generates a random lowercase character
-	 * @return Lowercase char
+	 * @return Random lowercase char
 	 */
 	public static char randomLowercaseLetter() {
 		SecureRandom random = new SecureRandom();
@@ -24,7 +24,7 @@ public class RandomUtils {
 	
 	/**
 	 * Generates a random uppercase character
-	 * @return Uppercase char
+	 * @return Random uppercase char
 	 */
 	public static char randomUppercaseLetter() {
 		SecureRandom random = new SecureRandom();
@@ -34,11 +34,12 @@ public class RandomUtils {
 	
 	/**
 	 * Generates a random character
-	 * @return char
+	 * @return Random char
 	 */
 	public static char randomLetter() {
-		char[] c = {randomLowercaseLetter(), randomUppercaseLetter()};
-		return c[(int)(Math.random()+0.5)];
+		SecureRandom random = new SecureRandom();
+		return random.nextBoolean() ?
+				randomLowercaseLetter() : randomUppercaseLetter();
 	}
 	
 	
@@ -46,7 +47,7 @@ public class RandomUtils {
 	 * Generates a random integer between min and max
 	 * @param min Minimum value
 	 * @param max Maximum value
-	 * @return Integer
+	 * @return Random integer
 	 */
 	public static int randomInteger(int min, int max) {
 		SecureRandom random = new SecureRandom();

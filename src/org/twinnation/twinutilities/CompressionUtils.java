@@ -24,8 +24,8 @@ public final class CompressionUtils {
 	
 	// TODO: allow specification of compression factor by user
 	private static final float LOW_COMPRESSION_FACTOR = 0.8f;
-	private static final float MED_COMPRESSION_FACTOR = 0.5f;
-	private static final float HIGH_COMPRESSION_FACTOR = 0.3f;
+	//private static final float MED_COMPRESSION_FACTOR = 0.5f;
+	//private static final float HIGH_COMPRESSION_FACTOR = 0.3f;
 	
 	/** Prevents instantiation of this utility class */
 	private CompressionUtils() {}
