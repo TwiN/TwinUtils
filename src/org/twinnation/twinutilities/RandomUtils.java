@@ -6,7 +6,7 @@ import java.security.SecureRandom;
  * Utility class with multiple methods related to the generation of 
  * random elements
  */
-public class RandomUtils {
+public final class RandomUtils {
 	
 	/** Prevents instantiation of this utility class */
 	private RandomUtils() {}
@@ -67,9 +67,7 @@ public class RandomUtils {
 		while (length --> 0) {
 			password += (random.nextBoolean() ? 
 					randomLetter() : ""+randomInteger(0, 9));
-			
 		}
 		return password;
 	}
-	
 }
