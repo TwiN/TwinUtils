@@ -54,7 +54,7 @@ public class RandomUtils {
 		return (min+random.nextInt(max-min+1));
 	}
 	
-	
+	 
 	/**
 	 * Generates a random password
 	 * TODO: add way to control which characters you want in the password (e.g. uppercase, lowercase, numbers, etc..)
