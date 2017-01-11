@@ -122,7 +122,6 @@ public final class CryptUtils {
 	 * @return Encrypted String
 	 */
 	public static String rot13(String s) {
-		String result = "";
 		for(int i = 0; i < s.length(); i++) {
 			char c = s.charAt(i);
 			if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M')) {
@@ -130,8 +129,8 @@ public final class CryptUtils {
 			} else if ((c >= 'n' && c <= 'z') || (c >= 'N' && c <= 'Z')) {
 				c -= 13;
 			}
-			result += c;
+			s = s.substring(0, i) + c + s.substring(i+1);
 		}
-		return result;
+		return s;
 	}
 }
