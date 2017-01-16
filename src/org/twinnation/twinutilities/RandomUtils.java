@@ -17,8 +17,7 @@ public final class RandomUtils {
 	 * @return Random lowercase char
 	 */
 	public static char randomLowercaseLetter() {
-		SecureRandom random = new SecureRandom();
-		return (char)((int)'a'+random.nextInt(('z'-'a')+1));
+		return (char)((int)'a'+(new SecureRandom()).nextInt(('z'-'a')+1));
 	}
 	
 	
@@ -27,8 +26,7 @@ public final class RandomUtils {
 	 * @return Random uppercase char
 	 */
 	public static char randomUppercaseLetter() {
-		SecureRandom random = new SecureRandom();
-		return (char)((int)'A'+random.nextInt(('Z'-'A')+1));
+		return (char)((int)'A'+(new SecureRandom()).nextInt(('Z'-'A')+1));
 	}
 	
 	
@@ -37,8 +35,7 @@ public final class RandomUtils {
 	 * @return Random char
 	 */
 	public static char randomLetter() {
-		SecureRandom random = new SecureRandom();
-		return random.nextBoolean() ?
+		return (new SecureRandom()).nextBoolean() ?
 				randomLowercaseLetter() : randomUppercaseLetter();
 	}
 	
@@ -50,11 +47,10 @@ public final class RandomUtils {
 	 * @return Random integer
 	 */
 	public static int randomInteger(int min, int max) {
-		SecureRandom random = new SecureRandom();
-		return (min+random.nextInt(max-min+1));
+		return (min+(new SecureRandom()).nextInt(max-min+1));
 	}
-	
 	 
+	
 	/**
 	 * Generates a random password
 	 * TODO: add way to control which characters you want in the password (e.g. uppercase, lowercase, numbers, etc..)
