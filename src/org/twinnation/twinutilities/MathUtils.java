@@ -35,14 +35,13 @@ public final class MathUtils {
 	/**
 	 * Finds the value of the nth prime
 	 * @param nthPrime Position of the prime to find
-	 * @return value of the nth prime
-	 * @throws PrimeCannotBeNegativeException 
+	 * @return Value of the nth prime
+	 * @throws InvalidPrimePositionException 
 	 */
 	public static int getPrimeAtPosition(int nthPrime) throws InvalidPrimePositionException { 
 		if (nthPrime < 1) {
 			throw new InvalidPrimePositionException();
 		}
-		// TODO: throw exception if pass invalid number
 		int primeCounter = 1, result = 0;
 		for (int i = 0; primeCounter <= nthPrime; i++) {
 			if (isPrime(i)) { 
