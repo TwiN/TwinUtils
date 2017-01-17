@@ -41,10 +41,7 @@ public class SearchUtils {
 	 * @return Whether the Object <i>o</i> is null or not
 	 */
 	public static boolean isNull(Object o) {
-		if (o == null || (o+"").equalsIgnoreCase("null")) {
-			return true;
-		}
-		return false;
+		return (o == null || (o+"").equalsIgnoreCase("null"));
 	}
 	
 	
