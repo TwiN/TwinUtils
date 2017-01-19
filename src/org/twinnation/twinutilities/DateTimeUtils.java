@@ -14,19 +14,23 @@ public final class DateTimeUtils {
 	public static final long MS_PER_MIN    = 60000L;   
 	public static final long MS_PER_SEC    = 1000L;
 	
-	
+	/** Exact number of day per year */
 	public static final double DAY_PER_YEAR = 365.2425;
+	/** Number of days in a normal calendar year */
 	public static final int CAL_DAY_PER_YEAR = 365;
+	/** Number of days in a leap calendar year */
 	public static final int CAL_LEAP_DAY_PER_YEAR = 366;
+	/** Number of months in a year */
 	public static final double MONTH_PER_YEAR = 12;
 	
+	/** Array representing the number of days in each month of the year */
 	public static final int[] DAY_PER_MONTH = {0, 
 			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-	
+	/** Name of each months of the year */
 	public static final String[] MONTH_NAMES = {"",
 			"January", "February", "March", "April", "May", "June", "July",
 			"August", "September", "October", "November", "December"};
-	
+	/** Name of each day of the week */
 	public static final String[] DAY_NAMES = {"",
 			"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 	

@@ -17,7 +17,7 @@ public class SearchUtils {
 	 * @return Whether the <i>needle</i> is in the <i>haystack</i> or not
 	 */
 	public static boolean isInList(Object[] haystack, Object needle) {
-		for(Object o: haystack) {
+		for(Object o : haystack) {
 			if (o.equals(needle)) { return true; }
 		}
 		return false;
