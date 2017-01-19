@@ -4,8 +4,10 @@ import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
 
 /**
  * Utility class used to easily log events
- * TODO: Find a better name for this class. This class isn't actually
- * a "utility class", but rather, a normal class.
+ * 
+ * TODO: Add an option to select which logging level should be saved to a log
+ * (ex, WARN+ would save LEVEL_WARN and LEVEL_ERROR in a file whereas
+ * LEVEL_LOG and LEVEL_INFO would only be printed on the console)
  */
 public final class LogUtils {
 	
@@ -17,13 +19,17 @@ public final class LogUtils {
 	/** Maximum file size per log file generated */
 	private static final int MAX_LOG_FILE_SIZE_IN_KB = 250;
 	
+	/** Current number of log files created */
 	private static int logFileCounter = 1;
-	/** The name of the logging file */
+	/** The default name of the logging file */
 	private static String loggingFile = "logs.txt"; 
-	// TODO: add loggingFolder option
+	/** Current logging file name */
 	private static String currentLoggingFile;
+	/** Whether the logging utility is initialized */
 	private static boolean isInitialized = false;
+	/** Whether to save the logging messages in a file */
 	private static boolean isSavingToFile = false;
+	/** Whether to print the logging messages directly to the console */
 	private static boolean isPrintingToConsole = true;
 	
 	
@@ -42,7 +48,7 @@ public final class LogUtils {
 	
 	/**
 	 * Initializes the logging utility
-	 * @param saveLogToFile Saves logs to file or not
+	 * @param saveLogToFile Whether to save logs to file
 	 */
 	public static void init(boolean saveLogToFile) {
 		isSavingToFile = saveLogToFile;
@@ -52,7 +58,7 @@ public final class LogUtils {
 	
 	/**
 	 * Initializes the logging utility
-	 * @param fName
+	 * @param fName Name of the file
 	 * @param saveLogToFile Saves logs to file or not
 	 */
 	public static void init(String fName, boolean saveLogToFile) {
@@ -64,7 +70,7 @@ public final class LogUtils {
 	
 	/**
 	 * Initializes the logging utility
-	 * @param fName
+	 * @param fName Name of the file
 	 * @param saveLogToFile Whether to save logs to file or not
 	 * @param printLogToConsole Whether to print logs to console or not
 	 */
@@ -123,7 +129,7 @@ public final class LogUtils {
 			throw new LogNotInitializedException();
 		}
 		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
-			CompressionUtils.gzipAndDelete(currentLoggingFile);
+			CompressionUtils.gzipAndDelete(currentLoggingFile); 
 			currentLoggingFile = FileUtils.stripExtension(loggingFile)
 					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
 					+"."+(FileUtils.getExtension(loggingFile).equals("") ?
