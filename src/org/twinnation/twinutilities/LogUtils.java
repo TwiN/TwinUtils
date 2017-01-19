@@ -11,9 +11,13 @@ import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
  */
 public final class LogUtils {
 	
+	/** String displayed at the start of all message classified as "log" */
 	private static final String LEVEL_LOG   = "LOGGING";
+	/** String displayed at the start of all message classified as "info" */
 	private static final String LEVEL_INFO  = "INFORMA";
+	/** String displayed at the start of all message classified as "warn" */
 	private static final String LEVEL_WARN  = "WARNING";
+	/** String displayed at the start of all message classified as "error" */
 	private static final String LEVEL_ERROR = " ERROR ";
 	
 	/** Maximum file size per log file generated */
