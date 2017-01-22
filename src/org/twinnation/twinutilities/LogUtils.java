@@ -21,7 +21,7 @@ public final class LogUtils {
 	private static final String LEVEL_ERROR = " ERROR ";
 	
 	/** Maximum file size per log file generated */
-	private static final int MAX_LOG_FILE_SIZE_IN_KB = 250;
+	private static final int MAX_LOG_FILE_SIZE_IN_KB = 512;
 	
 	/** Current number of log files created */
 	private static int logFileCounter = 1;
@@ -132,8 +132,9 @@ public final class LogUtils {
 		if (!isInitialized) {
 			throw new LogNotInitializedException();
 		}
+		// Maximum log file size has been reached
 		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
-			CompressionUtils.gzipAndDelete(currentLoggingFile); 
+			CompressionUtils.gzipAndDelete(currentLoggingFile);
 			currentLoggingFile = FileUtils.stripExtension(loggingFile)
 					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
 					+"."+(FileUtils.getExtension(loggingFile).equals("") ?
