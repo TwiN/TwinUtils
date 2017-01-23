@@ -1,6 +1,7 @@
 package org.twinnation.twinutilities;
 
 import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
+import org.twinnation.twinutilities.exceptions.LogNotLoggingException;
 
 /**
  * Utility class used to easily log events
@@ -45,6 +46,9 @@ public final class LogUtils {
 	 * Initializes the logging utility
 	 */
 	public static void init() {
+		if (!isPrintingToConsole && !isSavingToFile) { // logger is useless
+			throw new LogNotLoggingException();
+		}
 		isInitialized = true;
 		currentLoggingFile = loggingFile;
 	}
