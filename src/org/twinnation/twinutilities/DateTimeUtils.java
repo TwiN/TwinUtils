@@ -6,6 +6,9 @@ import java.util.Calendar;
 // IN PROGRESS
 //
 
+/**
+ * Date/Time-related utility class
+ */
 public final class DateTimeUtils {
 	
 	public static final long MS_PER_YEAR   = 31557600000L;
