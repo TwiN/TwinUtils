@@ -11,12 +11,15 @@ import java.util.Calendar;
  */
 public final class DateTimeUtils {
 	
-	public static final long MS_PER_YEAR   = 31557600000L;
-	public static final long MS_PER_DAY    = 86400000L; 
-	public static final long MS_PER_HOUR   = 3600000L;  
-	public static final long MS_PER_MIN    = 60000L;   
-	public static final long MS_PER_SEC    = 1000L;
+	/** Local timezone offset in ms */
+	public static final long TIMEZONE_MODIFIER = Calendar.getInstance().getTimeZone().getRawOffset();
 	
+	
+	
+	/** Number of millisecond in a day */
+	public static final long MS_PER_DAY = 86400000L; 
+	/** Number of hours in a day */
+	public static final int HOUR_PER_DAY = 24;
 	/** Exact number of day per year */
 	public static final double DAY_PER_YEAR = 365.2425;
 	/** Number of days in a normal calendar year */
@@ -58,11 +61,12 @@ public final class DateTimeUtils {
 	
 	
 	/**
-	 * Gets the amount of milliseconds since 1970-01-01 00:00:00 
+	 * Gets the amount of milliseconds since 1970-01-01 00:00:00
+	 * with local timezone taken in consideration
 	 * @return Milliseconds since 1970-01-01 00:00:00 
 	 */
-	public static long getUnixTime() {
-		return System.currentTimeMillis();
+	public static long getUnixTimeWithTimezoneOffset() {
+		return System.currentTimeMillis()+TIMEZONE_MODIFIER;
 	}
 	
 	
@@ -71,7 +75,7 @@ public final class DateTimeUtils {
 	 * @return Days since 1970-01-01 00:00:00 
 	 */
 	private static double getDaySinceUnix() {
-		return (getUnixTime()/MS_PER_DAY);
+		return (getUnixTimeWithTimezoneOffset()/MS_PER_DAY);
 	}
 	
 	
@@ -135,13 +139,15 @@ public final class DateTimeUtils {
 	
 	
 	public static int getDayOfMonth() {
-		int currentMonth = JANUARY, currentDay = 0;
-		for (int i = 0; i < getDayOfYear(); i++) {
-			currentDay++;
-			if (currentDay == getDaysInMonthAtYear(getYear(), currentMonth)) {
+		int currentMonth = JANUARY, currentDay = 0, currentYear = getYear(), 
+				currentDayOfYear = getDayOfYear();
+		for (int i = 0; i < currentDayOfYear; i++) {
+			if (currentDay > 27 // only perform check at end of each month
+					&& currentDay == getDaysInMonthAtYear(currentYear, currentMonth)) {
 				currentDay = 0;
 				currentMonth++;
 			}
+			currentDay++;
 		}
 		return currentDay;
 	}
@@ -224,7 +230,7 @@ public final class DateTimeUtils {
 		return h+":"+m+":"+s;
 	}
 	
-	/*
+	/**
 	public static void main(String[] args) {
 		System.out.println(getTimestamp());
 		System.out.println(getDayName(getDayOfWeek()));
