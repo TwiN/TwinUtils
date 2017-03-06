@@ -132,12 +132,19 @@ public final class DateTimeUtils {
 		return Calendar.getInstance().get(Calendar.DAY_OF_WEEK); // TODO: dayofweek
 	}
 	
-	
+	/**
+	 * Get the name of the day 
+	 * @param day nth day of the week
+	 * @return Name of the day 
+	 */
 	public static String getDayName(int day) {
 		return DAY_NAMES[day]; // TODO: prevent invalid number
 	}
 	
-	
+	/**
+	 * Get the first week day of the month
+	 * @return 
+	 */
 	public static int getDayOfMonth() {
 		int currentMonth = JANUARY, currentDay = 0, currentYear = getYear(), 
 				currentDayOfYear = getDayOfYear();
@@ -152,7 +159,12 @@ public final class DateTimeUtils {
 		return currentDay;
 	}
 	
-	
+	/**
+	 * Get amount of days at the specific month and year given
+	 * @param year
+	 * @param month
+	 * @return
+	 */
 	public static int getDaysInMonthAtYear(int year, int month) {
 		if (month == FEBRUARY) {
 			return isLeapYear(year)?DAY_PER_MONTH[FEBRUARY]+1:DAY_PER_MONTH[FEBRUARY];
