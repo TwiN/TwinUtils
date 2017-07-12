@@ -1,7 +1,5 @@
 package org.twinnation.twinutilities;
 
-import org.twinnation.twinutilities.exceptions.LogNotInitializedException;
-import org.twinnation.twinutilities.exceptions.LogNotLoggingException;
 
 /**
  * Utility class used to easily log events
@@ -13,88 +11,103 @@ import org.twinnation.twinutilities.exceptions.LogNotLoggingException;
 public final class LogUtils {
 	
 	/** String displayed at the start of all message classified as "log" */
-	private static final String LEVEL_LOG   = "LOGGING";
+	private static final String LEVEL_LOG   = "[LOG]  ";
 	/** String displayed at the start of all message classified as "info" */
-	private static final String LEVEL_INFO  = "INFORMA";
+	private static final String LEVEL_INFO  = "[INFO] ";
 	/** String displayed at the start of all message classified as "warn" */
-	private static final String LEVEL_WARN  = "WARNING";
+	private static final String LEVEL_WARN  = "[WARN] ";
 	/** String displayed at the start of all message classified as "error" */
-	private static final String LEVEL_ERROR = " ERROR ";
+	private static final String LEVEL_ERROR = "[ERROR]";
 	
 	/** Maximum file size per log file generated */
 	private static final int MAX_LOG_FILE_SIZE_IN_KB = 512;
 	
+	/** Instance of LogUtils */
+	private static LogUtils instance = null;
+	
 	/** Current number of log files created */
-	private static int logFileCounter = 1;
+	private int logFileCounter = 1;
 	/** The default name of the logging file */
-	private static String loggingFile = "logs.txt"; 
+	private String loggingFile = "logs.txt"; 
 	/** Current logging file name */
-	private static String currentLoggingFile;
-	/** Whether the logging utility is initialized */
-	private static boolean isInitialized = false;
+	private String currentLoggingFile;
 	/** Whether to save the logging messages in a file */
-	private static boolean isSavingToFile = false;
+	private boolean isSavingToFile = false;
 	/** Whether to print the logging messages directly to the console */
-	private static boolean isPrintingToConsole = true;
+	private boolean isPrintingToConsole = true;
 	
 	
 	/** Prevents instantiation of this utility class */
 	private LogUtils() {}
 	
 	
-	/**
-	 * Initializes the logging utility
-	 */
-	public static void init() {
-		if (!isPrintingToConsole && !isSavingToFile) { // logger is useless
-			throw new LogNotLoggingException();
+	public static LogUtils getInstance() {
+		if (instance == null) {
+			instance = new LogUtils();
 		}
-		isInitialized = true;
-		currentLoggingFile = loggingFile;
+		return instance;
 	}
 	
 	
 	/**
-	 * Initializes the logging utility
-	 * @param saveLogToFile Whether to save logs to file
+	 * Checks if LogUtils is currently saving logs in a file
+	 * @return Whether LogUtils is saving the logs in a file
 	 */
-	public static void init(boolean saveLogToFile) {
-		isSavingToFile = saveLogToFile;
-		init();
+	public boolean isSavingToFile() {
+		return isSavingToFile;
+	}
+	
+	/**
+	 * Sets whether to save the logs to the loggingFile or not.
+	 * @param isSavingToFile
+	 */
+	public void setSavingToFile(boolean isSavingToFile) {
+		this.isSavingToFile = isSavingToFile;
+		if (isSavingToFile) {
+			currentLoggingFile = loggingFile;
+		}
 	}
 	
 	
 	/**
-	 * Initializes the logging utility
-	 * @param fName Name of the file
-	 * @param saveLogToFile Saves logs to file or not
+	 * Gets the logging file
+	 * @return Name of the file to write logs in
 	 */
-	public static void init(String fName, boolean saveLogToFile) {
-		loggingFile = fName;
-		isSavingToFile = saveLogToFile;
-		init();
+	public String getLoggingFile() {
+		return loggingFile;
 	}
-	
 	
 	/**
-	 * Initializes the logging utility
-	 * @param fName Name of the file
-	 * @param saveLogToFile Whether to save logs to file or not
-	 * @param printLogToConsole Whether to print logs to console or not
+	 * Sets the logging file
+	 * @param loggingFile Name of the file to write logs in
 	 */
-	public static void init(String fName, boolean saveLogToFile,
-			boolean printLogToConsole) {
-		// TODO: Throw exception if !printLogToConsole && !saveLogToFile
-		isPrintingToConsole = printLogToConsole;
-		init(fName, saveLogToFile);
+	public void setLoggingFile(String loggingFile) {
+		this.loggingFile = loggingFile;
 	}
-	
-	
+
+
+	/**
+	 * Checks if LogUtils is currently printing logs to console
+	 * @return Whether the logs are being printed to console
+	 */
+	public boolean isPrintingToConsole() {
+		return isPrintingToConsole;
+	}
+
+
+	/**
+	 * Sets whether to print the logs to consol
+	 */
+	public void setPrintingToConsole(boolean isPrintingToConsole) {
+		this.isPrintingToConsole = isPrintingToConsole;
+	}
+
+
 	/**
 	 * Logs a message with severity level "LOG"
 	 * @param message Message to log
 	 */
-	public static void log(String message) {
+	public void log(String message) {
 		doLog(LEVEL_LOG, message);
 	}
 	
@@ -103,7 +116,7 @@ public final class LogUtils {
 	 * Logs a message with severity level "INFORMATION"
 	 * @param message Message to log
 	 */
-	public static void info(String message) {
+	public void info(String message) {
 		doLog(LEVEL_INFO, message);
 	}
 	
@@ -112,7 +125,7 @@ public final class LogUtils {
 	 * Logs a message with severity level "WARNING"
 	 * @param message Message to log
 	 */
-	public static void warn(String message) {
+	public void warn(String message) {
 		doLog(LEVEL_WARN, message);
 	}
 	
@@ -121,7 +134,7 @@ public final class LogUtils {
 	 * Logs a message with severity level "ERROR"
 	 * @param message Message to log
 	 */
-	public static void error(String message) {
+	public void error(String message) {
 		doLog(LEVEL_ERROR, message);
 	}
 	
@@ -132,24 +145,20 @@ public final class LogUtils {
 	 * @param message Message to log
 	 * @throws LogNotInitializedException If LogUtils.init hasn't been called
 	 */
-	private static void doLog(String level, String message) throws LogNotInitializedException {
-		if (!isInitialized) {
-			throw new LogNotInitializedException();
-		}
-		// Maximum log file size has been reached
-		if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
-			CompressionUtils.gzipAndDelete(currentLoggingFile);
-			currentLoggingFile = FileUtils.stripExtension(loggingFile)
-					+""+ConversionUtils.zeroPad(4, ""+logFileCounter++)
-					+"."+(FileUtils.getExtension(loggingFile).equals("") ?
-						"txt" : FileUtils.getExtension(loggingFile));
-		}
-		message = DateTimeUtils.getTimestamp()+" ["+level+"] -> "+message;
-		if (isPrintingToConsole) {
-			System.err.println(message);
-		}
+	private void doLog(String level, String message) {
+		message = "[" + DateTimeUtils.getTimestamp() + "]"+level+" -> " + message;
 		if (isSavingToFile) {
+			// Maximum log file size has been reached
+			if (FileUtils.getFileSizeInKb(currentLoggingFile) > MAX_LOG_FILE_SIZE_IN_KB) {
+				CompressionUtils.gzipAndDelete(currentLoggingFile);
+				currentLoggingFile = FileUtils.stripExtension(loggingFile) + "" 
+						+ ConversionUtils.zeroPad(4, ""+logFileCounter++) + "." 
+						+ (FileUtils.getExtension(loggingFile).equals("") ? "txt":FileUtils.getExtension(loggingFile));
+			}
 			FileUtils.writeInFile(message, currentLoggingFile, true);
+		}
+		if (isPrintingToConsole) {
+			System.out.println(message);
 		}
 	}
 }
