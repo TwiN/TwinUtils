@@ -36,7 +36,7 @@ public final class MathUtils {
 	 * Finds the value of the nth prime
 	 * @param nthPrime Position of the prime to find
 	 * @return Value of the nth prime
-	 * @throws InvalidPrimePositionException 
+	 * @throws InvalidPrimePositionException Exception
 	 */
 	public static int getPrimeAtPosition(int nthPrime) throws InvalidPrimePositionException { 
 		if (nthPrime < 1) {

@@ -19,7 +19,8 @@ public final class ConversionUtils {
 	
 	/**
 	 * Converts a char array to a String
-	 * @return String 
+	 * @param c Array of characters
+	 * @return String formed by the array of characters
 	 */
 	public static String chars2String(char[] c) {
 		String result = "";
@@ -87,7 +88,7 @@ public final class ConversionUtils {
 	 * Removes extra decimals.
 	 * @param decimalExpected Maximum number of decimal 
 	 * @param num Number to test decimal
-	 * @return number with <= decimalExpected
+	 * @return number with less or the same amount of decimalExpected
 	 */
 	public static double fixedDecimal(int decimalExpected, double num) {
 		String[] fullNum = (""+(num)).split("\\.", 2);

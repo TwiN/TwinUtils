@@ -35,6 +35,8 @@ public final class LogUtils {
 	private boolean isSavingToFile = false;
 	/** Whether to print the logging messages directly to the console */
 	private boolean isPrintingToConsole = true;
+	/** Whether to save 'LEVEL_INFO' and lower level logs in loggingFile */
+	private boolean isSavingInfoAndDownInLoggingFile = true;
 	
 	
 	/** Prevents instantiation of this utility class */
@@ -58,12 +60,12 @@ public final class LogUtils {
 	}
 	
 	/**
-	 * Sets whether to save the logs to the loggingFile or not.
-	 * @param isSavingToFile
+	 * Sets whether to save the logs to the loggingFile.
+	 * @param isSavingToFile Whether to save the logs to the loggingFile 
 	 */
-	public void setSavingToFile(boolean isSavingToFile) {
-		this.isSavingToFile = isSavingToFile;
-		if (isSavingToFile) {
+	public void setSavingToFile(boolean b) {
+		this.isSavingToFile = b;
+		if (b) {
 			currentLoggingFile = loggingFile;
 		}
 	}
@@ -96,10 +98,31 @@ public final class LogUtils {
 
 
 	/**
-	 * Sets whether to print the logs to consol
+	 * Sets whether to print the logs to console
+	 * @param b Whether to print logs to console
 	 */
-	public void setPrintingToConsole(boolean isPrintingToConsole) {
-		this.isPrintingToConsole = isPrintingToConsole;
+	public void setPrintingToConsole(boolean b) {
+		this.isPrintingToConsole = b;
+	}
+
+
+	
+	/**
+	 * Whether 'LEVEL_INFO' and lower level logs are being saved in loggingFile
+	 * @return isSavingInfoAndDownInLoggingFile
+	 */
+	public boolean isSavingInfoAndDownInLoggingFile() {
+		return isSavingInfoAndDownInLoggingFile;
+	}
+
+
+	
+	/**
+	 * Sets whether to save 'LEVEL_INFO' and lower level logs in loggingFile
+	 * @param b Whether to save 'LEVEL_INFO' and lower level logs in loggingFile
+	 */
+	public void setSavingInfoAndDownInLoggingFile(boolean b) {
+		this.isSavingInfoAndDownInLoggingFile = b;
 	}
 
 
@@ -155,7 +178,11 @@ public final class LogUtils {
 						+ ConversionUtils.zeroPad(4, ""+logFileCounter++) + "." 
 						+ (FileUtils.getExtension(loggingFile).equals("") ? "txt":FileUtils.getExtension(loggingFile));
 			}
-			FileUtils.writeInFile(message, currentLoggingFile, true);
+			if (!(!isSavingInfoAndDownInLoggingFile && (level.equals(LEVEL_LOG) || level.equals(LEVEL_INFO)))) {
+				// Not saving LEVEL_INFO-
+			} else {
+				FileUtils.writeInFile(message, currentLoggingFile, true);
+			}
 		}
 		if (isPrintingToConsole) {
 			System.out.println(message);

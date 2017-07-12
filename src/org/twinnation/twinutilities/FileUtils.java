@@ -109,14 +109,14 @@ public final class FileUtils {
 	 * @param fileNameOrPath Name of the file or path toward the file
 	 * @return A file name without any extension
 	 */
-	public static String getBaseName(String fullPath) {
-		if (SearchUtils.isInString(fullPath, "/") 
-				|| SearchUtils.isInString(fullPath, "\\")) {
-			Character separator = (fullPath.lastIndexOf('/')>=0) ?
-					'/' : (fullPath.lastIndexOf('\\')>=0) ? '\\' : null;
-			return fullPath.substring(fullPath.lastIndexOf(separator)+1);
+	public static String getBaseName(String fileNameOrPath) {
+		if (SearchUtils.isInString(fileNameOrPath, "/") 
+				|| SearchUtils.isInString(fileNameOrPath, "\\")) {
+			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
+					'/' : (fileNameOrPath.lastIndexOf('\\')>=0) ? '\\' : null;
+			return fileNameOrPath.substring(fileNameOrPath.lastIndexOf(separator)+1);
 		}
-		return fullPath;
+		return fileNameOrPath;
 	}
 	
 	

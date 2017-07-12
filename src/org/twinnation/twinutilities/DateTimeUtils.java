@@ -143,7 +143,7 @@ public final class DateTimeUtils {
 	
 	/**
 	 * Get the first week day of the month
-	 * @return 
+	 * @return Weekday of the month
 	 */
 	public static int getDayOfMonth() {
 		int currentMonth = JANUARY, currentDay = 0, currentYear = getYear(), 
@@ -161,9 +161,9 @@ public final class DateTimeUtils {
 	
 	/**
 	 * Get amount of days at the specific month and year given
-	 * @param year
-	 * @param month
-	 * @return
+	 * @param year Year
+	 * @param month Month
+	 * @return Number of days in the given month
 	 */
 	public static int getDaysInMonthAtYear(int year, int month) {
 		if (month == FEBRUARY) {
