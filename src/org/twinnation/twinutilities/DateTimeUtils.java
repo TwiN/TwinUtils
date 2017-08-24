@@ -30,8 +30,7 @@ public final class DateTimeUtils {
 	public static final double MONTH_PER_YEAR = 12;
 	
 	/** Array representing the number of days in each month of the year */
-	public static final int[] DAY_PER_MONTH = {0, 
-			31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+	public static final int[] DAY_PER_MONTH = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 	/** Name of each months of the year */
 	public static final String[] MONTH_NAMES = {"",
 			"January", "February", "March", "April", "May", "June", "July",
@@ -238,7 +237,7 @@ public final class DateTimeUtils {
 	public static String getTime() {
 		String h = ConversionUtils.zeroPad(2, ""+getHours());
 		String m = ConversionUtils.zeroPad(2, ""+getMinutes());
-		String s = ConversionUtils.zeroPad(2,""+getSeconds());
+		String s = ConversionUtils.zeroPad(2, ""+getSeconds());
 		return h+":"+m+":"+s;
 	}
 	
