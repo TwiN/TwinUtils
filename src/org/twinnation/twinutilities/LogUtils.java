@@ -3,10 +3,6 @@ package org.twinnation.twinutilities;
 
 /**
  * Utility class used to easily log events
- * 
- * TODO: Add an option to select which logging level should be saved to a log
- * (ex, WARN+ would save LEVEL_WARN and LEVEL_ERROR in a file whereas
- * LEVEL_LOG and LEVEL_INFO would only be printed on the console)
  */
 public final class LogUtils {
 	
@@ -166,7 +162,6 @@ public final class LogUtils {
 	 * Logs the message with the given severity level
 	 * @param level Severity level
 	 * @param message Message to log
-	 * @throws LogNotInitializedException If LogUtils.init hasn't been called
 	 */
 	private void doLog(String level, String message) {
 		message = "[" + DateTimeUtils.getTimestamp() + "]"+level+" -> " + message;
@@ -178,8 +173,8 @@ public final class LogUtils {
 						+ ConversionUtils.zeroPad(4, ""+logFileCounter++) + "." 
 						+ (FileUtils.getExtension(loggingFile).equals("") ? "txt":FileUtils.getExtension(loggingFile));
 			}
-			if (!(!isSavingInfoAndDownInLoggingFile && (level.equals(LEVEL_LOG) || level.equals(LEVEL_INFO)))) {
-				// Not saving LEVEL_INFO-
+			if (!isSavingInfoAndDownInLoggingFile && (level.equals(LEVEL_LOG) || level.equals(LEVEL_INFO))) {
+				// Not saving LEVEL_INFO and down
 			} else {
 				FileUtils.writeInFile(message, currentLoggingFile, true);
 			}
