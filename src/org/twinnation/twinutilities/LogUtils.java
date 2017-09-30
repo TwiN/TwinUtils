@@ -55,13 +55,14 @@ public final class LogUtils {
 		return isSavingToFile;
 	}
 	
+	
 	/**
 	 * Sets whether to save the logs to the loggingFile.
-	 * @param isSavingToFile Whether to save the logs to the loggingFile 
+	 * @param savingToFile Whether to save the logs to the loggingFile
 	 */
-	public void setSavingToFile(boolean b) {
-		this.isSavingToFile = b;
-		if (b) {
+	public void setSavingToFile(boolean savingToFile) {
+		this.isSavingToFile = savingToFile;
+		if (savingToFile) {
 			currentLoggingFile = loggingFile;
 		}
 	}
@@ -74,6 +75,7 @@ public final class LogUtils {
 	public String getLoggingFile() {
 		return loggingFile;
 	}
+	
 	
 	/**
 	 * Sets the logging file
@@ -101,7 +103,6 @@ public final class LogUtils {
 		this.isPrintingToConsole = b;
 	}
 
-
 	
 	/**
 	 * Whether 'LEVEL_INFO' and lower level logs are being saved in loggingFile
@@ -110,7 +111,6 @@ public final class LogUtils {
 	public boolean isSavingInfoAndDownInLoggingFile() {
 		return isSavingInfoAndDownInLoggingFile;
 	}
-
 
 	
 	/**
