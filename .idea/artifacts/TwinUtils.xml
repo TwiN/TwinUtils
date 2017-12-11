@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="TwinUtils">
+    <output-path>$PROJECT_DIR$/classes/artifacts/TwinUtils</output-path>
+    <root id="archive" name="TwinUtils.jar">
+      <element id="module-output" name="TwinUtils" />
+    </root>
+  </artifact>
+</component>
