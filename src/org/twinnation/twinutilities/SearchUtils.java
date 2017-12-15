@@ -12,10 +12,10 @@ public class SearchUtils {
 	/**
 	 * Gets the string between two strings
 	 */
-	public static String getBetween(String source, String start, String end) {
+	static String getBetween(String source, String start, String end) {
 		try {
-			int startIndex = source.indexOf(start) + 1;
-			return source.substring(startIndex, source.substring(startIndex).indexOf(end));
+			String sourceStartingFromStart = source.substring(source.indexOf(start) + start.length());
+			return sourceStartingFromStart.substring(0, sourceStartingFromStart.indexOf(end));
 		} catch (Exception e) {
 			return "";
 		}
