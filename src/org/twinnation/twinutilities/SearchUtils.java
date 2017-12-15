@@ -10,6 +10,19 @@ public class SearchUtils {
 	
 	
 	/**
+	 * Gets the string between two strings
+	 */
+	public static String getBetween(String source, String start, String end) {
+		try {
+			int startIndex = source.indexOf(start) + 1;
+			return source.substring(startIndex, source.substring(startIndex).indexOf(end));
+		} catch (Exception e) {
+			return "";
+		}
+	}
+	
+	
+	/**
 	 * Checks if the object <i>needle</i> is in the array <i>haystack</i>
 	 * NOTE: 1.0 (double) != 1 (int)...
 	 * @param haystack Array to search
@@ -60,4 +73,5 @@ public class SearchUtils {
 		}
 		return true;
 	}
+	
 }
