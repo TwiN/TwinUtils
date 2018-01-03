@@ -7,18 +7,14 @@ import java.net.*;
 /**
  * Network-related utility class
  */
-public final class NetUtils {
-
-	/** Prevents instantiation of this utility class */
-	private NetUtils() {}
-	
+public interface NetUtils {
 	
 	/**
 	 * Gets the IP of an hostname
 	 * @param hostname  Hostname or URL (ex: https://twinnation.org/)
 	 * @return The IP of the website
 	 */
-	public static String getIP(String hostname) {
+	static String getIP(String hostname) {
 		if (!hostname.startsWith("http://") && !hostname.startsWith("https://")) {
 			hostname = "http://"+hostname;
 		}
@@ -37,7 +33,7 @@ public final class NetUtils {
 	 * @param ip String to check
 	 * @return Whether <i>ip</i> is a valid IP
 	 */
-	public static boolean isValidIp(String ip) {
+	static boolean isValidIp(String ip) {
 		return isValidIPv4(ip) || isValidIPv6(ip);
 	}
 	
@@ -47,7 +43,7 @@ public final class NetUtils {
 	 * @param ip String to check
 	 * @return Whether <i>ip</i> is a valid IPv4
 	 */
-	public static boolean isValidIPv4(String ip) {
+	static boolean isValidIPv4(String ip) {
 		return ip.matches("\\A(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)"
 				+ "(\\.(25[0-5]|2[0-4]\\d|[0-1]?\\d?\\d)){3}\\z");
 	}
@@ -58,7 +54,7 @@ public final class NetUtils {
 	 * @param ip IP to check
 	 * @return Whether <i>ip</i> is a valid IPv6
 	 */
-	public static boolean isValidIPv6(String ip) {
+	static boolean isValidIPv6(String ip) {
 		return ip.toUpperCase().matches("\\A(?:[0-9A-F]{1,4}:){7}[0-9A-F]{1,4}\\z");
 	}
 	
@@ -69,7 +65,7 @@ public final class NetUtils {
 	 * @param port Port to check
 	 * @return Whether the port on the given host is busy 
 	 */
-	public static boolean isPortBusy(String host, int port) {
+	static boolean isPortBusy(String host, int port) {
 		try {
 			(new Socket(host, port)).close();
 		} catch(IOException e) {
@@ -77,4 +73,5 @@ public final class NetUtils {
 		}
 		return true; // Connected to host:port (port in use)
 	}
+	
 }

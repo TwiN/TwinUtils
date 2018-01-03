@@ -20,15 +20,12 @@ import javax.imageio.stream.ImageOutputStream;
  * Compression-related utility class
  * FIXME: In progress
  */
-public final class CompressionUtils {
+public interface CompressionUtils {
 	
 	// TODO: allow specification of compression factor by user
-	private static final float LOW_COMPRESSION_FACTOR = 0.8f;
-	//private static final float MED_COMPRESSION_FACTOR = 0.5f;
-	//private static final float HIGH_COMPRESSION_FACTOR = 0.3f;
-	
-	/** Prevents instantiation of this utility class */
-	private CompressionUtils() {}
+	static final float LOW_COMPRESSION_FACTOR = 0.8f;
+	//static final float MED_COMPRESSION_FACTOR = 0.5f;
+	//static final float HIGH_COMPRESSION_FACTOR = 0.3f;
 	
 	
 	/**
@@ -37,7 +34,7 @@ public final class CompressionUtils {
 	 * @return Whether the file was successfully compressed
 	 * @throws Exception FIXME: Throw a better exception than that
 	 */
-	public static boolean compressJPG(String imageFileName) throws Exception {
+	static boolean compressJPG(String imageFileName) throws Exception {
 		String extension = FileUtils.getExtension(imageFileName);
 		String baseName = FileUtils.stripExtension(imageFileName);
 		String outputImageFileName = baseName+ "_min." + extension;
@@ -56,7 +53,7 @@ public final class CompressionUtils {
 		params.setCompressionMode(ImageWriteParam.MODE_EXPLICIT);
 		params.setCompressionQuality(LOW_COMPRESSION_FACTOR);
 		// Create new image file
-		imageWriter.write(null,(new IIOImage(bufferedImage, null, null)),params);
+		imageWriter.write(null, (new IIOImage(bufferedImage, null, null)),params);
 		// Close streams
 		input.close();
 		output.close();
@@ -72,7 +69,7 @@ public final class CompressionUtils {
 	 * @param fileName Name of the file to compress
 	 * @return Whether the compression has been successful or not
 	 */
-	public static boolean gzip(String fileName) {
+	static boolean gzip(String fileName) {
 		return gzip(fileName, false);
 	}
 	
@@ -82,7 +79,7 @@ public final class CompressionUtils {
 	 * @param fileName Name of the file to compress
 	 * @return Whether the compression has been successful or not
 	 */
-	public static boolean gzipAndDelete(String fileName) {
+	static boolean gzipAndDelete(String fileName) {
 		return gzip(fileName, true);
 	}
 	
@@ -93,7 +90,7 @@ public final class CompressionUtils {
 	 * @param deleteAfterCompress Whether to delete the file after compression
 	 * @return Whether the compression has been successful or not
 	 */
-	private static boolean gzip(String fileName, boolean deleteAfterCompress) {
+	static boolean gzip(String fileName, boolean deleteAfterCompress) {
 		try {
             FileInputStream is = new FileInputStream(fileName);
             FileOutputStream os = new FileOutputStream(fileName+".gz");
@@ -112,4 +109,5 @@ public final class CompressionUtils {
         }
 		return (new File(fileName)).delete();
 	}
+	
 }
