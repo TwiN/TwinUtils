@@ -84,8 +84,8 @@ public interface FileUtils {
 	 * @return The extension of the file
 	 */
 	static String getExtension(String fileNameOrPath) {
-		return fileNameOrPath.indexOf(".") > -1 ?
-				fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".")+1) : "";
+		return (fileNameOrPath != null && fileNameOrPath.contains(".")) ?
+			  fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1) : "";
 	}
 	
 	
