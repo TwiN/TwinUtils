@@ -1,6 +1,7 @@
 package org.twinnation.twinutilities;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
 import java.util.Base64;
@@ -62,6 +63,29 @@ public interface CryptUtils {
 	}
 	
 	
+	static String sha(int bits, String s) {
+		String result = "";
+		try {
+			MessageDigest digest = MessageDigest.getInstance("SHA-" + bits);
+			byte[] passwordBytesArray = digest.digest(s.getBytes("UTF-8"));
+			result = new BigInteger(1, passwordBytesArray).toString(16);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	
+	static String sha512(String s) {
+		return sha(512, s);
+	}
+	
+	
+	static String sha256(String s) {
+		return sha(256, s);
+	}
+	
+	
 	/**
 	 * Uses the SHA512 algorithm to create a salted hash for the given password 
 	 * @param password Password
@@ -69,19 +93,7 @@ public interface CryptUtils {
 	 * @return PasswordHash:PasswordSalt
 	 */
 	static String sha512Salted(String password, String salt) {
-		StringBuilder sb = new StringBuilder();
-		MessageDigest md;
-		try {
-			md = MessageDigest.getInstance("SHA-512");
-			md.update(salt.getBytes("UTF-8"));
-			byte[] bytes = md.digest(password.getBytes("UTF-8"));
-			for (int i = 0; i<bytes.length; i++){
-				sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return sb.toString()+":"+salt;
+		return sha512(password) + ":" + salt;
 	}
 	
 	
