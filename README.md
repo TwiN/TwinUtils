@@ -2,4 +2,4 @@
 
 
 ### TODO
-* Change all classes for interfaces
+* Add logging library
