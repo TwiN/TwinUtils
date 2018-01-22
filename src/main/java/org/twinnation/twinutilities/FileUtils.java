@@ -11,14 +11,20 @@ import java.nio.file.Paths;
 /**
  * Utility class related to files
  */
-public interface FileUtils {
+public class FileUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private FileUtils() {}
+	
 	
 	/**
 	 * Puts the content of a file in a String
 	 * @param fullPath Path to the file 
 	 * @return Content of the file
 	 */
-	static String getFileContents(String fullPath) {
+	public static String getFileContents(String fullPath) {
 		String contents = "";
 		try {
 			contents = new String(Files.readAllBytes(Paths.get(fullPath)));
@@ -34,7 +40,7 @@ public interface FileUtils {
 	 * @param fullPath Path of the file
 	 * @return File size in bytes
 	 */
-	static long getFileSizeInByte(String fullPath) {
+	public static long getFileSizeInByte(String fullPath) {
 		return (new File(fullPath).length());
 	}
 	
@@ -44,7 +50,7 @@ public interface FileUtils {
 	 * @param fullPath Path of the file
 	 * @return File size in KB
 	 */
-	static double getFileSizeInKb(String fullPath) {
+	public static double getFileSizeInKb(String fullPath) {
 		return ConversionUtils.fixedDecimal(3, (double)getFileSizeInByte(fullPath)/1024d);
 	}
 	
@@ -54,7 +60,7 @@ public interface FileUtils {
 	 * @param fullPath Path of the file
 	 * @return File size in MB
 	 */
-	static double getFileSizeInMb(String fullPath) {
+	public static double getFileSizeInMb(String fullPath) {
 		return ConversionUtils.fixedDecimal(3, getFileSizeInKb(fullPath)/1024d);
 	}
 	
@@ -66,7 +72,7 @@ public interface FileUtils {
 	 * @param append Appends to the end of the file or not
 	 * @return Whether the file exists or not
 	 */
-	static boolean writeInFile(String data, String fName, boolean append) {
+	public static boolean writeInFile(String data, String fName, boolean append) {
 		try {
 			PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter(fName, append)));
 			out.println(data);
@@ -83,7 +89,7 @@ public interface FileUtils {
 	 * @param fileNameOrPath Name of the file or path toward the file
 	 * @return The extension of the file
 	 */
-	static String getExtension(String fileNameOrPath) {
+	public static String getExtension(String fileNameOrPath) {
 		return (fileNameOrPath != null && fileNameOrPath.contains(".")) ?
 			  fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1) : "";
 	}
@@ -101,7 +107,7 @@ public interface FileUtils {
 	 * @param fileNameOrPath Name of the file or path toward the file
 	 * @return A file name without any extension
 	 */
-	static String getBaseName(String fileNameOrPath) {
+	public static String getBaseName(String fileNameOrPath) {
 		if (SearchUtils.isInString(fileNameOrPath, "/") 
 				|| SearchUtils.isInString(fileNameOrPath, "\\")) {
 			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
@@ -126,7 +132,7 @@ public interface FileUtils {
 	 * @param s String to remove the extension from
 	 * @return String without its previous
 	 */
-	static String stripExtension(String s) {
+	public static String stripExtension(String s) {
 		return s.indexOf('.') > -1 ? s.substring(0, s.lastIndexOf('.')) : s;
 	}
 
@@ -136,7 +142,7 @@ public interface FileUtils {
 	 * @param pathToDir Path to the directory (e.g. /home/twin/DIRECTORY_NAME)
 	 * @return Whether the directory was created (true) or already existed (false)
 	 */
-	static boolean mkdirIfNotExist(String pathToDir) {
+	public static boolean mkdirIfNotExist(String pathToDir) {
 		File dir = new File(pathToDir);
 		if (!dir.exists()) {
 			if (dir.mkdir()) {

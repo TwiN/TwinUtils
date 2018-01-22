@@ -6,13 +6,19 @@ import java.security.SecureRandom;
  * Utility class with multiple methods related to the generation of 
  * random elements
  */
-public interface RandomUtils {
+public class RandomUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private RandomUtils() {}
+	
 	
 	/**
 	 * Generates a random lowercase character
 	 * @return Random lowercase char
 	 */
-	static char randomLowercaseLetter() {
+	public static char randomLowercaseLetter() {
 		return (char)((int)'a'+(new SecureRandom()).nextInt(('z'-'a')+1));
 	}
 	
@@ -21,7 +27,7 @@ public interface RandomUtils {
 	 * Generates a random uppercase character
 	 * @return Random uppercase char
 	 */
-	static char randomUppercaseLetter() {
+	public static char randomUppercaseLetter() {
 		return (char)((int)'A'+(new SecureRandom()).nextInt(('Z'-'A')+1));
 	}
 	
@@ -30,7 +36,7 @@ public interface RandomUtils {
 	 * Generates a random character
 	 * @return Random char
 	 */
-	static char randomLetter() {
+	public static char randomLetter() {
 		return (new SecureRandom()).nextBoolean() ?
 				randomLowercaseLetter() : randomUppercaseLetter();
 	}
@@ -42,7 +48,7 @@ public interface RandomUtils {
 	 * @param max Maximum value
 	 * @return Random integer
 	 */
-	static int randomInteger(int min, int max) {
+	public static int randomInteger(int min, int max) {
 		return (min+(new SecureRandom()).nextInt(max-min+1));
 	}
 	
@@ -53,7 +59,7 @@ public interface RandomUtils {
 	 * @param length How much characters to randomly generate
 	 * @return Random password
 	 */
-	static String generatePassword(int length) {
+	public static String generatePassword(int length) {
 		SecureRandom random = new SecureRandom();
 		String password = "";
 		while (length --> 0) {

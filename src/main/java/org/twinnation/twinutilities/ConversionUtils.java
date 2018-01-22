@@ -11,14 +11,20 @@ import org.xml.sax.InputSource;
 /**
  * Conversion-related utility class
  */
-public interface ConversionUtils {
-
+public class ConversionUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private ConversionUtils() {}
+	
+	
 	/**
 	 * Converts a char array to a String
 	 * @param c Array of characters
 	 * @return String formed by the array of characters
 	 */
-	static String chars2String(char[] c) {
+	public static String chars2String(char[] c) {
 		String result = "";
 		int x = 0;
 		while (x <= c.length-1) { result += ""+c[x++]; }
@@ -31,7 +37,7 @@ public interface ConversionUtils {
 	 * @param contents String to convert
 	 * @return Document object containing contents 
 	 */
-	static Document string2Document(String contents) {
+	public static Document string2Document(String contents) {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder builder;
 		Document result = null;
@@ -72,7 +78,7 @@ public interface ConversionUtils {
 	 * @param numToPad Number to pad with 0s
 	 * @return Padded number
 	 */
-	static String zeroPad(int digitExpected, String numToPad) {
+	public static String zeroPad(int digitExpected, String numToPad) {
 		if (numToPad.length() == digitExpected) { return numToPad; }
 		String result = "";
 		while ((digitExpected---numToPad.length()) > 0) { result += "0"; }
@@ -86,7 +92,7 @@ public interface ConversionUtils {
 	 * @param num Number to test decimal
 	 * @return number with less or the same amount of decimalExpected
 	 */
-	static double fixedDecimal(int decimalExpected, double num) {
+	public static double fixedDecimal(int decimalExpected, double num) {
 		String[] fullNum = (""+(num)).split("\\.", 2);
 		String decimal = zeroPad(decimalExpected, fullNum[1]).substring(0, decimalExpected);
 		return Double.parseDouble(((int)num)+"."+decimal);
@@ -98,7 +104,7 @@ public interface ConversionUtils {
 	 * @param s String to sanitize
 	 * @return Sanitized/safe string
 	 */
-	static String htmlspecialchars(String s) {
+	public static String htmlspecialchars(String s) {
 		String result = "";
 		for (int i = 0; i<s.length(); i++) {
 			char c = s.charAt(i);

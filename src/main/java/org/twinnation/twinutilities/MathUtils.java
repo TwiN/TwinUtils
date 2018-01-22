@@ -5,14 +5,20 @@ import org.twinnation.twinutilities.exceptions.InvalidPrimePositionException;
 /**
  * Math-related utility class
  */
-public interface MathUtils {
+public class MathUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private MathUtils() {}
+	
 	
 	/**
 	 * Checks if the number passed as argument is prime
 	 * @param n Number to check
 	 * @return Whether the number is prime or not
 	 */
-	static boolean isPrime(int n) {
+	public static boolean isPrime(int n) {
 		if (n <= 1) {
 			return false;
 		} else if (n == 2) {
@@ -34,7 +40,7 @@ public interface MathUtils {
 	 * @return Value of the nth prime
 	 * @throws InvalidPrimePositionException Exception
 	 */
-	static int getPrimeAtPosition(int nthPrime) throws InvalidPrimePositionException {
+	public static int getPrimeAtPosition(int nthPrime) throws InvalidPrimePositionException {
 		if (nthPrime < 1) {
 			throw new InvalidPrimePositionException();
 		}
@@ -57,7 +63,7 @@ public interface MathUtils {
 	 * @param n Number to check
 	 * @return Whether the number is odd
 	 */
-	static boolean isOdd(int n) {
+	public static boolean isOdd(int n) {
 		return ((n & 1) == 1);
 	}
 	
@@ -67,7 +73,7 @@ public interface MathUtils {
 	 * @param n Number to check
 	 * @return Whether the number is even
 	 */
-	static boolean isEven(int n) {
+	public static boolean isEven(int n) {
 		return !isOdd(n);
 	}
 	

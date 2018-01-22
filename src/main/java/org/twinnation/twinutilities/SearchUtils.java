@@ -3,12 +3,18 @@ package org.twinnation.twinutilities;
 /**
  * Search-related utility class
  */
-public interface SearchUtils {
+public class SearchUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private SearchUtils() {}
+	
 	
 	/**
 	 * Gets the string between two strings
 	 */
-	static String getBetween(String source, String start, String end) {
+	public static String getBetween(String source, String start, String end) {
 		try {
 			String sourceStartingFromStart = source.substring(source.indexOf(start) + start.length());
 			return sourceStartingFromStart.substring(0, sourceStartingFromStart.indexOf(end));
@@ -25,7 +31,7 @@ public interface SearchUtils {
 	 * @param needle Element to find
 	 * @return Whether the <i>needle</i> is in the <i>haystack</i> or not
 	 */
-	static boolean isInList(Object[] haystack, Object needle) {
+	public static boolean isInList(Object[] haystack, Object needle) {
 		for(Object o : haystack) {
 			if (o.equals(needle)) { return true; }
 		}
@@ -39,7 +45,7 @@ public interface SearchUtils {
 	 * @param needle String to find
 	 * @return Whether the <i>needle</i> is in the <i>haystack</i> or not
 	 */
-	static boolean isInString(String haystack, String needle) {
+	public static boolean isInString(String haystack, String needle) {
 		return (haystack.indexOf(needle) >= 0);
 	}
 	
@@ -49,7 +55,7 @@ public interface SearchUtils {
 	 * @param o Object
 	 * @return Whether the Object <i>o</i> is null or not
 	 */
-	static boolean isNull(Object o) {
+	public static boolean isNull(Object o) {
 		return (o == null || (o+"").equalsIgnoreCase("null"));
 	}
 	
@@ -59,7 +65,7 @@ public interface SearchUtils {
 	 * @param s String to check
 	 * @return Whether the String <i>s</i> is a palindrome or not
 	 */
-	static boolean isPalindrome(String s) {
+	public static boolean isPalindrome(String s) {
 		for (int i = 0; i < s.length()/2; i++) {
 			if (s.charAt(i) != s.charAt(s.length()-1-i)) {
 				return false;

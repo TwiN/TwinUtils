@@ -9,7 +9,13 @@ import java.util.Base64;
 /**
  * Cryptography-related utility class
  */
-public interface CryptUtils {
+public class CryptUtils {
+	
+	/**
+	 * Prevents instantiation
+	 */
+	private CryptUtils() {}
+	
 	
 	/**
 	 * Encodes a byte array using base64
