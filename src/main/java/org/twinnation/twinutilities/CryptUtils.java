@@ -59,23 +59,58 @@ public class CryptUtils {
 	/**
 	 * Uses the SHA512 algorithm to create a salted hash for the given password 
 	 * @param str String to hash
-	 * @param salt Salt
 	 * @return hash:salt
 	 */
-	public static String sha512Salted(String str, String salt) {
-		return sha512(str) + ":" + salt;
+	public static String sha512WithRandomSalt(String str) {
+		String salt = getSalt();
+		return sha512(str + salt) + ":" + salt;
 	}
 	
 	
 	/**
-	 * Validates a string generated with CryptUtils.sha512Salted
+	 * Uses the SHA512 algorithm to create a salted hash for the given password
+	 * @param str String to hash
+	 * @return hash:salt
+	 */
+	public static String sha256WithRandomSalt(String str) {
+		String salt = getSalt();
+		return sha256(str + salt) + ":" + salt;
+	}
+	
+	
+	/**
+	 * Validates a string generated with CryptUtils.sha512WithRandomSalt
+	 *
+	 * USAGE:
+	 * String hashedPassword = sha512WithRandomSalt("lol"); // this is what you store in the db
+	 * boolean isPasswordGood = validateSha512WithSalt("lol", hashedPassword);
+	 *
 	 * @param str String (not hashed)
 	 * @param hashSalt hash:salt
 	 * @return Whether the password matches or not
 	 */
-	static boolean validateSha512Salted(String str, String hashSalt) {
+	public static boolean validateSha512WithSalt(String str, String hashSalt) {
+		String hash = hashSalt.split(":")[0];
 		String salt = hashSalt.split(":")[1];
-		return sha512Salted(str, salt).equalsIgnoreCase(hashSalt);
+		return sha512(str + salt).equalsIgnoreCase(hash);
+	}
+	
+	
+	/**
+	 * Validates a string generated with CryptUtils.sha256WithRandomSalt
+	 *
+	 * USAGE:
+	 * String hashedPassword = sha256WithRandomSalt("lol"); // this is what you store in the db
+	 * boolean isPasswordGood = validateSha256WithSalt("lol", hashedPassword);
+	 *
+	 * @param str String (not hashed)
+	 * @param hashSalt hash:salt
+	 * @return Whether the password matches or not
+	 */
+	public static boolean validateSha256WithSalt(String str, String hashSalt) {
+		String hash = hashSalt.split(":")[0];
+		String salt = hashSalt.split(":")[1];
+		return sha256(str + salt).equalsIgnoreCase(hash);
 	}
 	
 	
