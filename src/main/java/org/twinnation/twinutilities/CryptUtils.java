@@ -132,7 +132,7 @@ public class CryptUtils {
 	 * @param str String to encrypt with rot13
 	 * @return Encrypted String
 	 */
-	static String rot13(String str) {
+	public static String rot13(String str) {
 		for(int i = 0; i < str.length(); i++) {
 			char c = str.charAt(i);
 			if ((c >= 'a' && c <= 'm') || (c >= 'A' && c <= 'M')) {
