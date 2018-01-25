@@ -68,7 +68,7 @@ public class CryptUtils {
 	
 	
 	/**
-	 * Uses the SHA512 algorithm to create a salted hash for the given password
+	 * Uses the SHA256algorithm to create a salted hash for the given password
 	 * @param str String to hash
 	 * @return hash:salt
 	 */
