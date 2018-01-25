@@ -55,18 +55,16 @@ public class RandomUtils {
 	
 	/**
 	 * Generates a random password
-	 * TODO: add way to control which characters you want in the password (e.g. uppercase, lowercase, numbers, etc..)
 	 * @param length How much characters to randomly generate
 	 * @return Random password
 	 */
 	public static String generatePassword(int length) {
 		SecureRandom random = new SecureRandom();
-		String password = "";
+		StringBuilder sb = new StringBuilder();
 		while (length --> 0) {
-			password += (random.nextBoolean() ? 
-					randomLetter() : ""+randomInteger(0, 9));
+			sb.append(random.nextBoolean() ? randomLetter() : ""+randomInteger(0, 9));
 		}
-		return password;
+		return sb.toString();
 	}
 	
 }
