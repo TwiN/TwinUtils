@@ -108,8 +108,7 @@ public class FileUtils {
 	 * @return A file name without any extension
 	 */
 	public static String getBaseName(String fileNameOrPath) {
-		if (SearchUtils.isInString(fileNameOrPath, "/") 
-				|| SearchUtils.isInString(fileNameOrPath, "\\")) {
+		if (SearchUtils.isInString(fileNameOrPath, "/") || SearchUtils.isInString(fileNameOrPath, "\\")) {
 			Character separator = (fileNameOrPath.lastIndexOf('/')>=0) ?
 					'/' : (fileNameOrPath.lastIndexOf('\\')>=0) ? '\\' : null;
 			return fileNameOrPath.substring(fileNameOrPath.lastIndexOf(separator)+1);

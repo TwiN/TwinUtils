@@ -37,8 +37,7 @@ public class RandomUtils {
 	 * @return Random char
 	 */
 	public static char randomLetter() {
-		return (new SecureRandom()).nextBoolean() ?
-				randomLowercaseLetter() : randomUppercaseLetter();
+		return new SecureRandom().nextBoolean() ? randomLowercaseLetter() : randomUppercaseLetter();
 	}
 	
 	

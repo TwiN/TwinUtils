@@ -47,8 +47,7 @@ public class ConversionUtils {
 			result = builder.parse(new InputSource(new StringReader(contents)));
 			result.getDocumentElement().normalize();
 		} catch (Exception e) {
-			System.out.println("Unable to convert string to Document: "
-					+ e.getMessage());
+			System.out.println("Unable to convert string to Document: " + e.getMessage());
 		}
 		return result;
 	}
@@ -62,12 +61,14 @@ public class ConversionUtils {
 	 * @return String of the array with a separator between each elements
 	 */
 	public static String implode(String separator, String[] array) {
-		if (array == null) { return ""; }
-		String result = "";
-		for (int i = 0; i<array.length; i++) {
-			result += array[i]+""+(array.length-1==i?"":separator);
+		if (array == null) {
+			return "";
 		}
-		return result;
+		StringBuilder sb = new StringBuilder();
+		for (int i = 0; i<array.length; i++) {
+			sb.append(array[i]).append(array.length - 1 == i ? "" : separator);
+		}
+		return sb.toString();
 	}
 	
 	
@@ -75,15 +76,19 @@ public class ConversionUtils {
 	 * Pads a number with 0 until it has the expected amount of digits. 
 	 * If the numToPad has more than the amount of digit expected, 
 	 * no change will be made to the String.
-	 * @param digitExpected Number of digits expected
 	 * @param numToPad Number to pad with 0s
+	 * @param digitExpected Number of digits expected
 	 * @return Padded number
 	 */
-	public static String zeroPad(int digitExpected, String numToPad) {
-		if (numToPad.length() == digitExpected) { return numToPad; }
-		String result = "";
-		while ((digitExpected---numToPad.length()) > 0) { result += "0"; }
-		return result + numToPad;
+	public static String zeroPad(String numToPad, int digitExpected) {
+		if (numToPad.length() == digitExpected) {
+			return numToPad;
+		}
+		StringBuilder sb = new StringBuilder();
+		while ((digitExpected---numToPad.length()) > 0) {
+			sb.append("0");
+		}
+		return sb.toString() + numToPad;
 	}
 	
 	
@@ -95,7 +100,7 @@ public class ConversionUtils {
 	 */
 	public static double fixedDecimal(int decimalExpected, double num) {
 		String[] fullNum = (""+(num)).split("\\.", 2);
-		String decimal = zeroPad(decimalExpected, fullNum[1]).substring(0, decimalExpected);
+		String decimal = zeroPad(fullNum[1], decimalExpected).substring(0, decimalExpected);
 		return Double.parseDouble(((int)num)+"."+decimal);
 	}
 

@@ -55,23 +55,35 @@ public class SearchUtils {
 	 * @param o Object
 	 * @return Whether the Object <i>o</i> is null or not
 	 */
-	public static boolean isNull(Object o) {
-		return (o == null || (o+"").equalsIgnoreCase("null"));
+	public static boolean isNullOrEmpty(Object o) {
+		return (o == null || (o.toString()).equals(""));
 	}
 	
 	
 	/**
 	 * Checks if the given String is a palindrome.
 	 * @param s String to check
+	 * @param caseSensitive If the character case should be taken into consideration
 	 * @return Whether the String <i>s</i> is a palindrome or not
 	 */
-	public static boolean isPalindrome(String s) {
+	public static boolean isPalindrome(String s, boolean caseSensitive) {
+		s = caseSensitive ? s : s.toLowerCase();
 		for (int i = 0; i < s.length()/2; i++) {
 			if (s.charAt(i) != s.charAt(s.length()-1-i)) {
 				return false;
 			}
 		}
 		return true;
+	}
+	
+	/**
+	 * Checks if the given String is a palindrome.
+	 * By default, the character case is not taken in consideration
+	 * @param s String to check
+	 * @return Whether the String <i>s</i> is a palindrome or not
+	 */
+	public static boolean isPalindrome(String s) {
+		return isPalindrome(s, false);
 	}
 	
 }
