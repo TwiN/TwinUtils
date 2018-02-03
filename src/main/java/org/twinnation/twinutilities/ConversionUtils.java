@@ -21,14 +21,15 @@ public class ConversionUtils {
 	
 	/**
 	 * Converts a char array to a String
-	 * @param c Array of characters
+	 * @param chars Array of characters
 	 * @return String formed by the array of characters
 	 */
-	public static String chars2String(char[] c) {
-		String result = "";
-		int x = 0;
-		while (x <= c.length-1) { result += ""+c[x++]; }
-		return result;
+	public static String chars2String(char[] chars) {
+		StringBuilder result = new StringBuilder();
+		for (char c : chars) {
+			result.append(c);
+		}
+		return result.toString();
 	}
 	
 	
