@@ -37,7 +37,7 @@ public class SearchUtilsTest {
 	
 	
 	@Test
-	public void isNull() throws Exception {
+	public void isNullOrEmpty() throws Exception {
 		assertTrue(SearchUtils.isNullOrEmpty(null));
 		assertTrue(SearchUtils.isNullOrEmpty(""));
 		assertFalse(SearchUtils.isNullOrEmpty(1));
